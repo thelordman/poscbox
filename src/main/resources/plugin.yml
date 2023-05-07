@@ -1,0 +1,9 @@
+name: poscbox
+version: '${version}'
+main: me.lord.poscbox.Poscbox
+api-version: 1.19
+load: STARTUP
+depend: [FastAsyncWorldEdit]
+authors: [thelordman]
+description: The main plugin for the PoscBox Minecraft server
+website: http://www.posc.store
