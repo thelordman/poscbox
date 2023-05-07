@@ -1,6 +1,6 @@
-package me.lord.posc.discord.events;
+package me.lord.poscbox.discord.events;
 
-import me.lord.posc.discord.Discord;
+import me.lord.poscbox.discord.Discord;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import java.time.Instant;

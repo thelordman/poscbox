@@ -1,1 +1,1 @@
-rootProject.name = 'poscbox'
+rootProject.name = "poscbox"
