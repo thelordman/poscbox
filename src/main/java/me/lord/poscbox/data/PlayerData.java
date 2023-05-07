@@ -18,6 +18,7 @@ public final class PlayerData implements Data {
 	@Nullable
 	private UUID uuid;
 	private double balance = 0d;
+	private int killstreak = 0;
 
 	private transient Integer selectedNPC = null;
 	private transient boolean godMode = false;
@@ -88,5 +89,17 @@ public final class PlayerData implements Data {
 
 	public void setScoreboard(FastBoard scoreboard) {
 		this.scoreboard = scoreboard;
+	}
+
+	public int getKillstreak() {
+		return killstreak;
+	}
+
+	public void incrementKillstreak() {
+		killstreak++;
+	}
+
+	public void resetKillstreak() {
+		killstreak = 0;
 	}
 }

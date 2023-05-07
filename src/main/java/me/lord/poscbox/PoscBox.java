@@ -1,6 +1,7 @@
 package me.lord.poscbox;
 
 import me.lord.poscbox.data.DataManager;
+import me.lord.poscbox.data.PlayerData;
 import me.lord.poscbox.discord.Discord;
 import me.lord.poscbox.utilities.Cmd;
 import me.lord.poscbox.utilities.ReflectionUtil;
@@ -9,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -40,6 +42,15 @@ public final class PoscBox extends JavaPlugin {
 		registerCommands();
 
 		Discord.enable();
+
+		Bukkit.getScheduler().runTaskTimer(get(), () -> {
+			for (Player player : Bukkit.getOnlinePlayers()) {
+				PlayerData data = DataManager.getPlayerData(player);
+				if (data != null) {
+					data.getScoreboard().updateConstant();
+				}
+			}
+		}, 0L, 20L);
 	}
 
 	@Override
