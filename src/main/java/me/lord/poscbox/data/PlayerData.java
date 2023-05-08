@@ -24,6 +24,7 @@ public final class PlayerData implements Data {
 	private transient boolean godMode = false;
 	private transient boolean hunger = true;
 	private transient FastBoard scoreboard;
+	private transient boolean droppedEquipment = false;
 
 	public static double getBalance(UUID uuid) {
 		return DataManager.getPlayerData(uuid).getBalance();
@@ -101,5 +102,13 @@ public final class PlayerData implements Data {
 
 	public void resetKillstreak() {
 		killstreak = 0;
+	}
+
+	public boolean droppedEquipment() {
+		return droppedEquipment;
+	}
+
+	public void setDroppedEquipment(boolean droppedEquipment) {
+		this.droppedEquipment = droppedEquipment;
 	}
 }

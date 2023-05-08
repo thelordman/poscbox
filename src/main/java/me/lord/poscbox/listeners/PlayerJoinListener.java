@@ -3,6 +3,7 @@ package me.lord.poscbox.listeners;
 import me.lord.poscbox.PoscBox;
 import me.lord.poscbox.data.DataManager;
 import me.lord.poscbox.discord.events.PlayerJoin;
+import me.lord.poscbox.item.ItemManager;
 import me.lord.poscbox.utilities.PacketListener;
 import me.lord.poscbox.utilities.TextUtil;
 import org.bukkit.event.EventHandler;
@@ -15,6 +16,11 @@ public class PlayerJoinListener implements Listener {
 		PoscBox.onlinePlayers++;
 		PacketListener.injectPlayer(event.getPlayer());
 		if (!event.getPlayer().hasPlayedBefore()) DataManager.getGlobal().incrementTotalUsers();
+		if (!event.getPlayer().hasPlayedBefore()) {
+			DataManager.getGlobal().incrementTotalUsers();
+
+			ItemManager.joinKit(event.getPlayer());
+		}
 
 		DataManager.loadPlayerData(event.getPlayer());
 		DataManager.getPlayerData(event.getPlayer()).getScoreboard().updateAll();

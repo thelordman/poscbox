@@ -167,7 +167,7 @@ public class FastBoard {
 	}
 
 	public void updateAll() {
-		updateTitle(TextUtil.cs("&6&lPosc &7(" + TextUtil.format(PoscBox.onlinePlayers) + "/" + TextUtil.format(Bukkit.getMaxPlayers()) + ")"));
+		updateTitle(TextUtil.cs("&6&lPoscBox &7(" + TextUtil.format(PoscBox.onlinePlayers) + "/" + TextUtil.format(Bukkit.getMaxPlayers()) + ")"));
 		updateLines(
 				"",
 				"&6Balance&7: &f" + TextUtil.formatMoney(PlayerData.getBalance(getPlayer())),
@@ -179,7 +179,7 @@ public class FastBoard {
 				"&6Ping&7: &f" + TextUtil.format(getPlayer().getPing()) + " ms",
 				"&6TPS&7: &f" + TextUtil.format(Bukkit.getTPS()[0]),
 				"",
-				"&f&nposc.minehut.gg"
+				"&f&nposcbox.minehut.gg"
 		);
 	}
 

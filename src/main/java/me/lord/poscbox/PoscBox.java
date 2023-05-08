@@ -1,5 +1,6 @@
 package me.lord.poscbox;
 
+import com.sun.management.OperatingSystemMXBean;
 import me.lord.poscbox.data.DataManager;
 import me.lord.poscbox.data.PlayerData;
 import me.lord.poscbox.discord.Discord;
@@ -14,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.lang.management.ManagementFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Logger;
 
@@ -49,6 +51,7 @@ public final class PoscBox extends JavaPlugin {
 				if (data != null) {
 					data.getScoreboard().updateConstant();
 				}
+				updateTab(player);
 			}
 		}, 0L, 20L);
 	}
@@ -128,5 +131,16 @@ public final class PoscBox extends JavaPlugin {
 		mainWorld.setGameRule(GameRule.FALL_DAMAGE, false);
 		mainWorld.setGameRule(GameRule.DO_MOB_SPAWNING, false);
 		mainWorld.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
+		mainWorld.setGameRule(GameRule.KEEP_INVENTORY, true);
+	}
+
+	// TODO: Sort TAB list according to rank
+	public static void updateTab(Player player) {
+		player.sendPlayerListHeader(TextUtil.c("\n&6&lPoscBox\n"));
+		player.sendPlayerListFooter(TextUtil.c("\n   &6Online&7: &f" + TextUtil.format(onlinePlayers) + " &8| " +
+				"&6Ping&7: &f" + TextUtil.format(player.getPing()) + " &8| " +
+				"&6TPS&7: &f" + TextUtil.format(Bukkit.getTPS()[0]) + " &8| " +
+				"&6Memory&7: &f" + TextUtil.format((int) ((Runtime.getRuntime().maxMemory() - Runtime.getRuntime().freeMemory()) / 1000000)) + " MB/" + TextUtil.format((int) (Runtime.getRuntime().maxMemory() / 1000000)) + " MB" + " &8| " +
+				"&6CPU&7: &f" + TextUtil.format(ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class).getCpuLoad() * 100) + "%   \n                                                                                                  "));
 	}
 }
