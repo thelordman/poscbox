@@ -22,7 +22,6 @@ public interface Data extends Serializable {
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 }
