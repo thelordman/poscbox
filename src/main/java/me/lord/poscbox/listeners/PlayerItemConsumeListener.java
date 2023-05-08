@@ -6,14 +6,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.meta.PotionMeta;
 
-public class ConsumeListener implements Listener {
+public class PlayerItemConsumeListener implements Listener {
 
     @EventHandler
-    public void onConsume(PlayerItemConsumeEvent event) {
+    public void onPlayerItemConsume(PlayerItemConsumeEvent event) {
         if (event.getItem().getType() == Material.POTION) {
             PotionMeta potionMeta = (PotionMeta) event.getItem().getItemMeta();
-            if (potionMeta.getCustomEffects().get(0) == null)
+            if (potionMeta.getBasePotionData().getType().name().equalsIgnoreCase("WATER")) {
                 event.getPlayer().setFireTicks(0);
+            }
         }
     }
 }
