@@ -4,7 +4,12 @@ import me.lord.poscbox.utilities.ArrayUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+import java.io.Serial;
+
 public class BootsItemData extends ArmorItemData {
+	@Serial
+	private static final long serialVersionUID = 6184501224419028043L;
+
 	public BootsItemData(ItemStack item) {
 		super(item);
 	}

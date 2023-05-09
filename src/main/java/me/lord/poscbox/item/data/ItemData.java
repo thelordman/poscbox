@@ -7,14 +7,10 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.EnumSet;
 
 public abstract class ItemData extends ItemStackReference implements Serializable {
-	@Serial
-	private static final long serialVersionUID = 3868880100266558073L;
-
 	protected EnumSet<Tag> tags;
 
 	protected final Enchant[] enchants = new Enchant[getPossibleEnchantKeys().length];

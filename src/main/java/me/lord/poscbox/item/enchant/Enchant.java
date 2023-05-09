@@ -5,16 +5,19 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-public interface Enchant {
+import java.io.Serializable;
+
+public interface Enchant extends Serializable {
 	static Enchant of(ItemStack item, String key) {
 		Enchant enchant;
 
 		Enchantment vanilla = Enchantment.getByKey(NamespacedKey.minecraft(key));
-		if (vanilla == null) {
+		/* if (vanilla == null) {
 			enchant = switch (key) {
 				default -> null;
 			};
 		}
+		*/
 		enchant = VanillaEnchant.isValid(key) ? new VanillaEnchant(item, vanilla) : null;
 
 		return enchant;

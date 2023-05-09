@@ -2,15 +2,21 @@ package me.lord.poscbox.item.enchant;
 
 import me.lord.poscbox.item.ItemStackReference;
 import me.lord.poscbox.utilities.TextUtil;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
+import java.io.Serial;
+
 public class VanillaEnchant extends ItemStackReference implements Enchant {
+	@Serial
+	private static final long serialVersionUID = 7228328996987764185L;
+
 	private int level;
-	private final Enchantment vanilla;
+	private final String key;
 
 	public static boolean isValid(String key) {
-		if (TextUtil.isAny(key, "sharpness", "knockback", "sweeping_edge",
+		if (TextUtil.isAny(key, "sharpness", "knockback", "sweeping",
 				"fire_aspect", "protection", "fire_protection",
 				"projectile_protection", "blast_protection", "thorns",
 				"swift_sneak")) {
@@ -21,13 +27,13 @@ public class VanillaEnchant extends ItemStackReference implements Enchant {
 
 	public VanillaEnchant(ItemStack item, Enchantment enchantment) {
 		super(item);
-		vanilla = enchantment;
+		key = enchantment.getKey().getKey();
 		level = enchantment.getStartLevel();
 	}
 
 	@Override
 	public String getName() {
-		return TextUtil.sexySnakeString(vanilla.getKey().getKey());
+		return TextUtil.enchantmentName(key);
 	}
 
 	@Override
@@ -38,22 +44,22 @@ public class VanillaEnchant extends ItemStackReference implements Enchant {
 	@Override
 	public void setLevel(int level) {
 		this.level = level;
-		getRef().addUnsafeEnchantment(vanilla, level);
+		getRef().addUnsafeEnchantment(getVanilla(), level);
 	}
 
 	@Override
 	public int getMaxLevel() {
-		return vanilla.getMaxLevel() + 1;
+		return getVanilla().getMaxLevel() + 1;
 	}
 
 	@Override
 	public String getKey() {
-		return vanilla.getKey().getKey();
+		return key;
 	}
 
 	@Override
 	public double getCost(int level) {
-		return switch (vanilla.getKey().getKey()) {
+		return switch (key) {
 			case "sharpness" ->
 					switch (level) {
 						case 1 -> 100d;
@@ -71,7 +77,7 @@ public class VanillaEnchant extends ItemStackReference implements Enchant {
 						case 3 -> 5000d;
 						default -> 0d;
 					};
-			case "sweeping_edge" ->
+			case "sweeping" ->
 					switch (level) {
 						case 1 -> 1000d;
 						case 2 -> 5000d;
@@ -143,6 +149,6 @@ public class VanillaEnchant extends ItemStackReference implements Enchant {
 	}
 
 	public Enchantment getVanilla() {
-		return vanilla;
+		return Enchantment.getByKey(NamespacedKey.minecraft(key));
 	}
 }

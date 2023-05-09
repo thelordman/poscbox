@@ -4,10 +4,10 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.enchantments.Enchantment;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
-import java.util.Objects;
 
 public final class TextUtil {
 	public static Component c(String string) {
@@ -108,8 +108,12 @@ public final class TextUtil {
 		return false;
 	}
 
-	public static String sexySnakeString(String snake) {
-		char[] chars = snake.toCharArray();
+	public static String enchantmentName(String key) {
+		if (key.equals("sweeping")) {
+			return "Sweeping Edge";
+		}
+
+		char[] chars = key.toCharArray();
 		for (int i = 0; i < chars.length; i++) {
 			if (chars[i] == '_' || i == 0) {
 				if (chars[i] == '_') {
