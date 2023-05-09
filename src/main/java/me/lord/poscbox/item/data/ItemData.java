@@ -1,34 +1,34 @@
 package me.lord.poscbox.item.data;
 
-import io.netty.util.IllegalReferenceCountException;
 import me.lord.poscbox.item.ItemManager;
+import me.lord.poscbox.item.ItemStackReference;
+import me.lord.poscbox.item.enchant.Enchant;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.lang.ref.WeakReference;
 import java.util.EnumSet;
 
-public abstract class ItemData implements Serializable {
+public abstract class ItemData extends ItemStackReference implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 3868880100266558073L;
 
-	private final WeakReference<ItemStack> itemRef;
-
 	protected EnumSet<Tag> tags;
+
+	protected final Enchant[] enchants = new Enchant[getPossibleEnchantKeys().length];
 
 	public void onRightClick(Player player) {
 
 	}
 
-	public ItemStack getRef() {
-		if (itemRef.refersTo(null)) {
-			throw new IllegalStateException("Tried to access item reference which was cleared");
-		} else {
-			return itemRef.get();
-		}
+	public String[] getPossibleEnchantKeys() {
+		return new String[0];
+	}
+
+	public Enchant[] getEnchants() {
+		return enchants;
 	}
 
 	public Material getMaxType() {
@@ -40,7 +40,7 @@ public abstract class ItemData implements Serializable {
 	}
 
 	public ItemData(ItemStack item) {
-		itemRef = new WeakReference<>(item);
+		super(item);
 		tags = EnumSet.noneOf(Tag.class);
 	}
 
@@ -65,8 +65,10 @@ public abstract class ItemData implements Serializable {
 			case LOSABLE_10_LEVELS_LOWER -> addendum += "Drops on death to players that are 10 levels lower";
 			case UNDROPPABLE -> addendum += "Cannot be dropped";
 		}
-		ItemManager.addLore(getRef(), "", addendum);
-		tags.add(tag);
+		if (!addendum.equals("&7• ")) {
+			ItemManager.addLore(getRef(), addendum);
+			tags.add(tag);
+		}
 	}
 
 	public enum Tag {

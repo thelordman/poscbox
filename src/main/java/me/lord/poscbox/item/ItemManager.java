@@ -4,11 +4,14 @@ import me.lord.poscbox.PoscBox;
 import me.lord.poscbox.item.data.*;
 import me.lord.poscbox.utilities.TextUtil;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
+import org.apache.commons.lang.SerializationUtils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,11 +20,29 @@ import java.util.function.Consumer;
 
 public final class ItemManager {
 	public static ItemData getData(ItemStack item) {
-		return item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(PoscBox.get(), "item_data"), new ItemDataTagType());
+		if (item.getItemMeta().getPersistentDataContainer().has(new NamespacedKey(PoscBox.get(), "item_data"), PersistentDataType.BYTE_ARRAY)) {
+			PoscBox.logger.info("data exists");
+		} else {
+			PoscBox.logger.info("data does not exist");
+		}
+
+		byte[] primitive = item.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(PoscBox.get(), "item_data"), PersistentDataType.BYTE_ARRAY);
+		if (primitive == null) {
+			PoscBox.logger.info("primitive is null");
+			return null;
+		}
+		PoscBox.logger.info("primitive is not null; deserializing...");
+		return (ItemData) SerializationUtils.deserialize(primitive);
 	}
 
 	public static void setData(ItemStack item, ItemData data) {
-		item.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(PoscBox.get(), "item_data"), new ItemDataTagType(), data);
+		item.getItemMeta().getPersistentDataContainer().set(new NamespacedKey(PoscBox.get(), "item_data"), PersistentDataType.BYTE_ARRAY, SerializationUtils.serialize(data));
+		PoscBox.logger.info("data is set");
+		if (item.getItemMeta().getPersistentDataContainer().has(new NamespacedKey(PoscBox.get(), "item_data"), PersistentDataType.BYTE_ARRAY)) {
+			PoscBox.logger.info("data exists");
+		} else {
+			PoscBox.logger.info("data does not exist");
+		}
 	}
 
 	public static void modifyData(ItemStack item, Consumer<ItemData> consumer) {
@@ -34,9 +55,9 @@ public final class ItemManager {
 		ItemStack item = new ItemStack(material, amount);
 		ItemMeta meta = item.getItemMeta();
 		if (name != null) {
-			meta.displayName(TextUtil.c(name));
+			meta.displayName(TextUtil.c(name).decoration(TextDecoration.ITALIC, false));
 		}
-		meta.lore(Arrays.stream(lore).map(TextUtil::c).toList());
+		meta.lore(Arrays.stream(lore).map(s -> TextUtil.c(s).decoration(TextDecoration.ITALIC, false)).toList());
 		item.setItemMeta(meta);
 		return item;
 	}
@@ -44,7 +65,7 @@ public final class ItemManager {
 	public static ItemStack item(Material material, String... lore) {
 		ItemStack item = new ItemStack(material);
 		ItemMeta meta = item.getItemMeta();
-		meta.lore(Arrays.stream(lore).map(TextUtil::c).toList());
+		meta.lore(Arrays.stream(lore).map(s -> TextUtil.c(s).decoration(TextDecoration.ITALIC, false)).toList());
 		item.setItemMeta(meta);
 		return item;
 	}
@@ -52,7 +73,7 @@ public final class ItemManager {
 	public static void addLore(ItemStack item, String... strings) {
 		List<Component> lore = item.lore() == null ? new ArrayList<>() : item.lore();
 		for (String string : strings) {
-			lore.add(TextUtil.c(string));
+			lore.add(TextUtil.c(string).decoration(TextDecoration.ITALIC, false));
 		}
 		item.lore(lore);
 	}
@@ -73,6 +94,8 @@ public final class ItemManager {
 		setData(boots, new BootsItemData(boots));
 
 		setData(sword, new SwordItemData(sword));
+
+		setData(bread, new BreadItemData(bread));
 
 		player.getInventory().setHelmet(helmet);
 		player.getInventory().setChestplate(chestplate);
