@@ -22,3 +22,6 @@ commands:
   shop:
     description: Opens the wool shop.
     usage: /shop
+  joinkit:
+    description: Give the Join Kit to a player.
+    usage: /joinkit [<player>]

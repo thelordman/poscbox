@@ -6,4 +6,10 @@ public abstract class ArmorItemData extends EquipmentItemData {
 	public ArmorItemData(ItemStack item) {
 		super(item);
 	}
+
+	@Override
+	public String[] getPossibleEnchantKeys() {
+		return new String[]{"protection", "fire_protection", "projectile_protection",
+							"blast_protection", "thorns"};
+	}
 }

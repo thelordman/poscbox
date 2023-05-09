@@ -11,7 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_19_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-public class PacketListener {
+public final class PacketListener {
 
     public static void removePlayer(Player player) {
         Channel channel = ((CraftPlayer) player).getHandle().connection.connection.channel;

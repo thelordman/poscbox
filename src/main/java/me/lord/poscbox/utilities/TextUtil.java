@@ -7,10 +7,11 @@ import org.bukkit.Location;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
+import java.util.Objects;
 
 public final class TextUtil {
 	public static Component c(String string) {
-		return LegacyComponentSerializer.legacyAmpersand().deserialize(string);
+		return LegacyComponentSerializer.legacyAmpersand().deserialize("&r" + string);
 	}
 	public static String cs(String string) {
 		return ChatColor.translateAlternateColorCodes('&', string);
@@ -80,5 +81,43 @@ public final class TextUtil {
 
 	public static String joinArray(String[] strings, int from) {
 		return String.join(" ", Arrays.copyOfRange(strings, from, strings.length));
+	}
+
+	public static String toRoman(int number) {
+		StringBuilder builder = new StringBuilder();
+		int repeat;
+		String[] romans = new String[]{"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"};
+		int[] ints = new int[]{1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
+		for (int i = ints.length - 1; i >= 0; i--) {
+			repeat = number / ints[i];
+			number %= ints[i];
+			while (repeat > 0) {
+				builder.append(romans[i]);
+				repeat--;
+			}
+		}
+		return builder.toString();
+	}
+
+	public static boolean isAny(String string, String... strings) {
+		for (String str : strings) {
+			if (str.equals(string)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static String sexySnakeString(String snake) {
+		char[] chars = snake.toCharArray();
+		for (int i = 0; i < chars.length; i++) {
+			if (chars[i] == '_' || i == 0) {
+				if (chars[i] == '_') {
+					chars[i] = ' ';
+				}
+				chars[i == 0 ? 0 : i + 1] = Character.toUpperCase(chars[i == 0 ? 0 : i + 1]);
+			}
+		}
+		return String.valueOf(chars);
 	}
 }
