@@ -18,7 +18,7 @@ public class EntityDamageByEntityListener implements Listener {
             Player player = (Player) event.getEntity();
             Player attacker = (Player) event.getDamager();
             Material weapon = attacker.getInventory().getItemInMainHand().getType();
-            if (player.isBlocking() && weapon == Material.WOODEN_SWORD || weapon == Material.STONE_SWORD || weapon == Material.GOLDEN_SWORD || weapon == Material.IRON_SWORD || weapon == Material.DIAMOND_SWORD || weapon == Material.NETHERITE_SWORD) {
+            if (player.isBlocking() && player.getCooldown(Material.SHIELD) == 0 && (weapon == Material.WOODEN_SWORD || weapon == Material.STONE_SWORD || weapon == Material.GOLDEN_SWORD || weapon == Material.IRON_SWORD || weapon == Material.DIAMOND_SWORD || weapon == Material.NETHERITE_SWORD)) {
                 new BukkitRunnable() {
 
                     @Override
