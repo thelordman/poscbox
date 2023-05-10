@@ -155,11 +155,7 @@ public class EnchanterGUI extends ChestGUI {
 				data.setEnchant(newEnchant, i);
 
 				ItemManager.setData(player.getInventory().getItemInMainHand(), data);
-
-				player.closeInventory();
-				new EnchanterGUI().open(player);
-
-				return;
+				open(player);
 			}
 		}
 	}
