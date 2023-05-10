@@ -1,5 +1,6 @@
 package me.lord.poscbox.item.data;
 
+import me.lord.poscbox.item.enchant.Enchant;
 import me.lord.poscbox.utilities.ArrayUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -12,6 +13,7 @@ public class BootsItemData extends ArmorItemData {
 
 	public BootsItemData(ItemStack item) {
 		super(item);
+		enchants = new Enchant[6];
 	}
 
 	@Override

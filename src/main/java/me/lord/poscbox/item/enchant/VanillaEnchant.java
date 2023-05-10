@@ -29,6 +29,7 @@ public class VanillaEnchant extends ItemStackReference implements Enchant {
 		super(item);
 		key = enchantment.getKey().getKey();
 		level = enchantment.getStartLevel();
+		if (item != null) item.addUnsafeEnchantment(enchantment, enchantment.getStartLevel());
 	}
 
 	@Override
@@ -42,9 +43,9 @@ public class VanillaEnchant extends ItemStackReference implements Enchant {
 	}
 
 	@Override
-	public void setLevel(int level) {
+	public void setLevel(ItemStack item, int level) {
 		this.level = level;
-		getRef().addUnsafeEnchantment(getVanilla(), level);
+		item.addUnsafeEnchantment(getVanilla(), level);
 	}
 
 	@Override

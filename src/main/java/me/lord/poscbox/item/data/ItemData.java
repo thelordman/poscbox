@@ -13,7 +13,7 @@ import java.util.EnumSet;
 public abstract class ItemData extends ItemStackReference implements Serializable {
 	protected EnumSet<Tag> tags;
 
-	protected final Enchant[] enchants = new Enchant[getPossibleEnchantKeys().length];
+	protected Enchant[] enchants = new Enchant[getPossibleEnchantKeys().length];
 
 	public void onRightClick(Player player) {
 
@@ -25,6 +25,10 @@ public abstract class ItemData extends ItemStackReference implements Serializabl
 
 	public Enchant[] getEnchants() {
 		return enchants;
+	}
+
+	public void setEnchant(Enchant enchant, int index) {
+		enchants[index] = enchant;
 	}
 
 	public Material getMaxType() {

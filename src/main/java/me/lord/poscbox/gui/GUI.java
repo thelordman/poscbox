@@ -1,13 +1,13 @@
 package me.lord.poscbox.gui;
 
+import me.lord.poscbox.PoscBox;
+import me.lord.poscbox.data.DataManager;
 import me.lord.poscbox.utilities.TextUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
@@ -18,7 +18,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 
-public abstract class GUI implements Listener {
+public abstract class GUI {
 	public static ItemStack item(Material material, String name, String... lore) {
 		ItemStack item = new ItemStack(material);
 		ItemMeta meta = item.getItemMeta();
@@ -30,19 +30,15 @@ public abstract class GUI implements Listener {
 
 	protected ItemStack[] items;
 
-	@EventHandler
 	public void onInventoryDrag(InventoryDragEvent event) {
 		if (event.getView().title() == getTitle()) {
 			event.setCancelled(true);
 		}
 	}
 
-	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
-		if (event.getWhoClicked() instanceof Player player && event.getView().title() == getTitle()) {
-			event.setCancelled(true);
-			onClick(player, event.getSlot(), event.getClick());
-		}
+		event.setCancelled(true);
+		onClick((Player) event.getWhoClicked(), event.getSlot(), event.getClick());
 	}
 
 	protected void onClick(Player player, int slot, ClickType type) {
@@ -70,5 +66,6 @@ public abstract class GUI implements Listener {
 
 	public void open(Player player) {
 		player.openInventory(createInventory());
+		DataManager.getPlayerData(player).setCurrentGUI(this);
 	}
 }

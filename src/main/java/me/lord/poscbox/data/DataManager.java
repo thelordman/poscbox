@@ -91,6 +91,11 @@ public class DataManager {
 		return playerDataMap.get(uuid);
 	}
 
+	public static PlayerData getPlayerDataCopy(UUID uuid) {
+		PlayerData playerData = playerDataMap.containsKey(uuid) ? getPlayerData(uuid) : getPlayerDataFromFile(uuid);
+		return new PlayerData(playerData);
+	}
+
 	/**
 	 * Use this method to modify the PlayerData of offline players.
 	 */

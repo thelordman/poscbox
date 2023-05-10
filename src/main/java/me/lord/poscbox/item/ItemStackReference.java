@@ -5,21 +5,16 @@ import org.bukkit.inventory.ItemStack;
 import java.io.IOException;
 import java.io.Serial;
 import java.io.Serializable;
-import java.lang.ref.WeakReference;
 
 public abstract class ItemStackReference implements Serializable {
-	private transient WeakReference<ItemStack> itemRef;
+	private transient ItemStack itemRef;
 
 	protected ItemStackReference(ItemStack item) {
-		itemRef = new WeakReference<>(item);
+		itemRef = item;
 	}
 
 	public ItemStack getRef() {
-		if (itemRef.refersTo(null)) {
-			throw new IllegalStateException("Tried to access item reference which was cleared");
-		} else {
-			return itemRef.get();
-		}
+		return itemRef;
 	}
 
 	@Serial
@@ -31,6 +26,6 @@ public abstract class ItemStackReference implements Serializable {
 	@Serial
 	private void readObject(java.io.ObjectInputStream stream) throws IOException, ClassNotFoundException {
 		stream.defaultReadObject();
-		itemRef = new WeakReference<>(ItemStack.deserializeBytes((byte[]) stream.readObject()));
+		itemRef = ItemStack.deserializeBytes((byte[]) stream.readObject());
 	}
 }

@@ -1,5 +1,6 @@
 package me.lord.poscbox.data;
 
+import me.lord.poscbox.gui.GUI;
 import me.lord.poscbox.scoreboard.FastBoard;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +26,7 @@ public final class PlayerData implements Data {
 	private transient boolean hunger = true;
 	private transient FastBoard scoreboard;
 	private transient boolean droppedEquipment = false;
+	private transient GUI currentGUI = null;
 
 	public static double getBalance(UUID uuid) {
 		return DataManager.getPlayerData(uuid).getBalance();
@@ -37,6 +39,19 @@ public final class PlayerData implements Data {
 	public PlayerData(@NotNull UUID uuid) {
 		this.uuid = uuid;
 		scoreboard = new FastBoard(uuid);
+	}
+
+	public PlayerData(PlayerData playerData) {
+		uuid = playerData.uuid;
+		balance = playerData.balance;
+		killstreak = playerData.killstreak;
+
+		selectedNPC = playerData.selectedNPC;
+		godMode = playerData.godMode;
+		hunger = playerData.hunger;
+		scoreboard = playerData.scoreboard;
+		droppedEquipment = playerData.droppedEquipment;
+		currentGUI = playerData.currentGUI;
 	}
 
 	@Nullable
@@ -110,5 +125,13 @@ public final class PlayerData implements Data {
 
 	public void setDroppedEquipment(boolean droppedEquipment) {
 		this.droppedEquipment = droppedEquipment;
+	}
+
+	public GUI getCurrentGUI() {
+		return currentGUI;
+	}
+
+	public void setCurrentGUI(GUI currentGUI) {
+		this.currentGUI = currentGUI;
 	}
 }

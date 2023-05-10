@@ -3,7 +3,7 @@ version: '1.0-INDEV'
 main: me.lord.poscbox.PoscBox
 api-version: 1.19
 depend: [ FastAsyncWorldEdit ]
-authors: [ thelordman ]
+authors: [ thelordman, hotpocket184, TotallyAl, liamint ]
 description: The main plugin for the PoscBox Minecraft server
 website: https://discord.gg/YeUacKAWV2
 commands:
@@ -25,3 +25,8 @@ commands:
   joinkit:
     description: Give the Join Kit to a player.
     usage: /joinkit [<player>]
+  economy:
+    description: Modify the server economy.
+    aliases:
+      - eco
+    usage: /economy <player> [<text>] [<amount>]

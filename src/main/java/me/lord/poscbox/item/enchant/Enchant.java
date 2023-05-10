@@ -33,11 +33,7 @@ public interface Enchant extends Serializable {
 		return Material.ENCHANTED_BOOK;
 	}
 
-	void setLevel(int level);
-
-	default void incrementLevel() {
-		setLevel(getLevel() + 1);
-	}
+	void setLevel(ItemStack item, int level);
 
 	default int getMaxLevel() {
 		return 1;
