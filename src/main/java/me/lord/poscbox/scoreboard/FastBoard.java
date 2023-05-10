@@ -179,7 +179,7 @@ public class FastBoard {
 				"&6Ping&7: &f" + TextUtil.format(getPlayer().getPing()) + " ms",
 				"&6TPS&7: &f" + TextUtil.format(Bukkit.getTPS()[0]),
 				"",
-				"&f&nposcbox.minehut.gg"
+				"&7&nposcbox.minehut.gg"
 		);
 	}
 
