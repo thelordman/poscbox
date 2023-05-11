@@ -6,6 +6,6 @@ import me.lord.poscbox.discord.Discord;
 
 public class PlayerChat {
 	public static void exe(AsyncChatEvent event) {
-		Discord.MINECRAFT_CHAT.sendMessage("**" + event.getPlayer().getDisplayName() + ":** " + TextUtil.stripColorCodes(TextUtil.componentToString(event.message()))).queue();
+		Discord.MINECRAFT_CHAT.sendMessage(TextUtil.stripColorCodes("**" + TextUtil.componentToString(event.getPlayer().displayName()) + ":** " + TextUtil.componentToString(event.message()))).queue();
 	}
 }

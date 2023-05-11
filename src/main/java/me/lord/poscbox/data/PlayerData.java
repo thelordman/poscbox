@@ -1,8 +1,14 @@
 package me.lord.poscbox.data;
 
+import me.lord.poscbox.PoscBox;
 import me.lord.poscbox.gui.GUI;
+import me.lord.poscbox.rank.Rank;
 import me.lord.poscbox.scoreboard.FastBoard;
+import me.lord.poscbox.utilities.TextUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionAttachment;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,6 +26,7 @@ public final class PlayerData implements Data {
 	private UUID uuid;
 	private double balance = 0d;
 	private int killstreak = 0;
+	private Rank rank = null;
 
 	private transient Integer selectedNPC = null;
 	private transient boolean godMode = false;
@@ -39,12 +46,14 @@ public final class PlayerData implements Data {
 	public PlayerData(@NotNull UUID uuid) {
 		this.uuid = uuid;
 		scoreboard = new FastBoard(uuid);
+		initPermissions();
 	}
 
 	public PlayerData(PlayerData playerData) {
 		uuid = playerData.uuid;
 		balance = playerData.balance;
 		killstreak = playerData.killstreak;
+		rank = playerData.rank;
 
 		selectedNPC = playerData.selectedNPC;
 		godMode = playerData.godMode;
@@ -133,5 +142,34 @@ public final class PlayerData implements Data {
 
 	public void setCurrentGUI(GUI currentGUI) {
 		this.currentGUI = currentGUI;
+	}
+
+	public Rank getRank() {
+		return rank;
+	}
+
+	public void setRank(Rank rank) {
+		this.rank = rank;
+		initPermissions();
+		if (Bukkit.getPlayer(getUUID()) != null) {
+			if (rank == null) {
+				Bukkit.getPlayer(getUUID()).displayName(Bukkit.getPlayer(getUUID()).name());
+			} else {
+				Bukkit.getPlayer(getUUID()).displayName(TextUtil.c(rank.getDisplay() + " &8| &f" + Bukkit.getPlayer(getUUID()).name()));
+			}
+		}
+	}
+
+	public void initPermissions() {
+		Player player = Bukkit.getPlayer(getUUID());
+		if (player != null) {
+			if (rank != null) {
+				PermissionAttachment attachment = player.addAttachment(PoscBox.get());
+				for (Permission permission : getRank().getPermissions()) {
+					if (!player.hasPermission(permission))
+						attachment.setPermission(permission, true);
+				}
+			}
+		}
 	}
 }

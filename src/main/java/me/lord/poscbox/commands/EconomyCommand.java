@@ -1,7 +1,6 @@
 package me.lord.poscbox.commands;
 
 import me.lord.poscbox.data.DataManager;
-import me.lord.poscbox.data.PlayerData;
 import me.lord.poscbox.utilities.Cmd;
 import me.lord.poscbox.utilities.TextUtil;
 import org.bukkit.Bukkit;
@@ -111,7 +110,7 @@ public class EconomyCommand implements Cmd {
 
 	@Override
 	public String permission() {
-		return "posc.command.economy";
+		return "poscbox.command.economy";
 	}
 
 	@Override

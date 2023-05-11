@@ -1,6 +1,5 @@
 package me.lord.poscbox.utilities;
 
-
 import org.bukkit.command.TabExecutor;
 import org.jetbrains.annotations.NotNull;
 

@@ -13,7 +13,7 @@ public class AsyncChatListener implements Listener {
 	public void onAsyncChat(AsyncChatEvent event) {
 		event.setCancelled(true);
 		Player player = event.getPlayer();
-		Bukkit.broadcast(TextUtil.c(player.getDisplayName() + "&7: &f").append(event.message()));
+		Bukkit.broadcast(TextUtil.c(player.hasPermission("posc.donator") ? "&f" : "&7").append(player.displayName()).append(TextUtil.c("&7: " + (player.hasPermission("posc.donator") ? "&f" : "&7")).append(event.message())));
 		PlayerChat.exe(event);
 	}
 }

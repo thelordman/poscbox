@@ -104,7 +104,7 @@ public final class PoscBox extends JavaPlugin {
 					for (String name : cmd.names()) {
 						get().getCommand(name).setExecutor(cmd);
 						get().getCommand(name).permissionMessage(TextUtil.c("&cYou need the permission \"" + cmd.permission() + "\" to use this command."));
-						if (cmd.permission() != null) {
+						if (cmd.permissions(name) != null) {
 							get().getCommand(name).setPermission(cmd.permissions(name));
 						}
 					}

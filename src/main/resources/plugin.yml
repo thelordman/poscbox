@@ -30,3 +30,6 @@ commands:
     aliases:
       - eco
     usage: /economy <player> [<text>] [<amount>]
+  rank:
+    description: Modify ranks of players.
+    usage: /rank <player> <set> <rank>
