@@ -47,7 +47,7 @@ public class RankCommand implements Cmd {
 
 	@Override
 	public String permission() {
-		return "posc.command.rank";
+		return "poscbox.command.rank";
 	}
 
 	@Override
