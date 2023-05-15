@@ -153,9 +153,9 @@ public final class PlayerData implements Data {
 		initPermissions();
 		if (Bukkit.getPlayer(getUUID()) != null) {
 			if (rank == null) {
-				Bukkit.getPlayer(getUUID()).displayName(Bukkit.getPlayer(getUUID()).name());
+				Bukkit.getPlayer(getUUID()).displayName(TextUtil.c(Bukkit.getPlayer(getUUID()).getName()));
 			} else {
-				Bukkit.getPlayer(getUUID()).displayName(TextUtil.c(rank.getDisplay() + " &8| &f" + Bukkit.getPlayer(getUUID()).name()));
+				Bukkit.getPlayer(getUUID()).displayName(TextUtil.c(rank.getDisplay() + " &8| &f" + Bukkit.getPlayer(getUUID()).getName()));
 			}
 		}
 	}
@@ -166,8 +166,7 @@ public final class PlayerData implements Data {
 			if (rank != null) {
 				PermissionAttachment attachment = player.addAttachment(PoscBox.get());
 				for (Permission permission : getRank().getPermissions()) {
-					if (!player.hasPermission(permission))
-						attachment.setPermission(permission, true);
+					attachment.setPermission(permission, true);
 				}
 			}
 		}

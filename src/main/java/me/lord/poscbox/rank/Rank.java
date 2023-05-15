@@ -11,15 +11,15 @@ public enum Rank {
 	HERO("&bHero", "poscbox.donator"),
 	LEGEND("&6Legend", "poscbox.donator"),
 
-	JR_DEVELOPER("&dJr. Developer", "poscbox.donator", "posc.staff"),
-	JR_MOD("&aJr. Mod", "poscbox.donator", "posc.staff"),
-	MOD("&eMod", "poscbox.donator", "posc.staff", "posc.command.gamemode.spectator", "posc.command.gamemode.survival"),
-	SR_MOD("&6Sr. Mod", "poscbox.donator", "posc.staff", "posc.command.gamemode.*"),
-	BUILDER("&9Builder", "poscbox.donator", "posc.staff", "posc.command.gamemode.creative", "posc.command.gamemode.survival", "posc.command.gamemode.spectator", "posc.command.joinkit"),
-	ADMIN("&cAdmin", "poscbox.donator", "posc.staff", "posc.command.gamemode.*", "posc.command.economy", "posc.command.joinkit", "posc.command.rank"),
-	DEVELOPER("&dDeveloper", "poscbox.donator", "posc.staff", "posc.command.gamemode.*", "posc.command.economy", "posc.command.joinkit", "posc.command.rank"),
-	HEAD_DEVELOPER("&5Head Developer", "poscbox.donator", "posc.staff", "posc.command.gamemode.*", "posc.command.economy", "posc.command.joinkit", "posc.command.rank"),
-	OWNER("&4Owner", "poscbox.donator", "posc.staff", "posc.command.gamemode.*", "posc.command.economy", "posc.command.joinkit", "posc.command.rank");
+	JR_DEVELOPER("&dJr. Developer", "poscbox.donator", "poscbox.staff"),
+	JR_MOD("&aJr. Mod", "poscbox.donator", "poscbox.staff"),
+	MOD("&eMod", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.spectator", "poscbox.command.gamemode.survival"),
+	SR_MOD("&6Sr. Mod", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*"),
+	BUILDER("&9Builder", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.creative", "poscbox.command.gamemode.survival", "poscbox.command.gamemode.spectator", "poscbox.command.joinkit"),
+	ADMIN("&cAdmin", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
+	DEVELOPER("&dDeveloper", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
+	HEAD_DEVELOPER("&5Head Developer", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
+	OWNER("&4Owner", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank");
 
 	private final String[] permissions;
 	private final String display;
