@@ -18,7 +18,12 @@ public interface Data extends Serializable {
 
 	static Data deserialize(String path) {
 		try (ObjectInputStream inputStream = new ObjectInputStream(new GZIPInputStream(new FileInputStream(path)))) {
-			return (Data) inputStream.readObject();
+			Data data = (Data) inputStream.readObject();
+			if (data instanceof PlayerData playerData) {
+				playerData.initPermissions();
+				return playerData;
+			}
+			return data;
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}

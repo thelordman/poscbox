@@ -27,14 +27,16 @@ public final class PlayerData implements Data {
 	private double balance = 0d;
 	private int killstreak = 0;
 	private Rank rank = null;
-	private PermissionAttachment permissionAttachment = null;
 
+	private transient PermissionAttachment permissionAttachment = null;
 	private transient Integer selectedNPC = null;
 	private transient boolean godMode = false;
 	private transient boolean hunger = true;
 	private transient FastBoard scoreboard;
 	private transient boolean droppedEquipment = false;
 	private transient GUI currentGUI = null;
+
+
 
 	public static double getBalance(UUID uuid) {
 		return DataManager.getPlayerData(uuid).getBalance();
@@ -150,7 +152,6 @@ public final class PlayerData implements Data {
 	}
 
 	public void setRank(Rank rank) {
-
 		this.rank = rank;
 		initPermissions();
 		if (Bukkit.getPlayer(getUUID()) != null) {
@@ -172,7 +173,7 @@ public final class PlayerData implements Data {
 				for (Permission permission : getRank().getPermissions()) {
 					permissionAttachment.setPermission(permission, true);
 				}
-			} else {
+			} else if (permissionAttachment != null) {
 				player.removeAttachment(permissionAttachment);
 				permissionAttachment = null;
 			}
