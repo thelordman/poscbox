@@ -41,9 +41,9 @@ public class BlockShopCommand implements Cmd {
                     inventory.getContents()[i].setLore(List.of(TextUtil.cs("&eLeft-Click &6Buy 10 Wool"), TextUtil.cs("&eRight-Click &6Buy 25 Wool"), TextUtil.cs("&eShift-Click &6Buy 50 Wool")));
             }
             /*
-                00 01 02 03 04 05 06 07 08
-                09 10 11 12 13 14 15 16 17
-                18 19 20 21 22 23 24 25 26
+             *   00 01 02 03 04 05 06 07 08
+             *   09 10 11 12 13 14 15 16 17
+             *   18 19 20 21 22 23 24 25 26
              */
             player.openInventory(inventory);
         }
