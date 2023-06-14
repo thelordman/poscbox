@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
@@ -50,7 +51,7 @@ public class Discord {
 						.addOption(OptionType.STRING, "command", "The command to be executed (Don't include '/')")
 		).queue();
 
-		MINECRAFT_CHAT.sendMessage(":green_circle: **Server Online**").queue();
+		MINECRAFT_CHAT.sendMessage(":green_circle: **Server Online** <@672518392447762462>").queue();
 	}
 
 	public static void disable() {

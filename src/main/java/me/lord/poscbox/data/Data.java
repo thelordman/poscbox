@@ -1,5 +1,7 @@
 package me.lord.poscbox.data;
 
+import org.bukkit.Bukkit;
+
 import java.io.*;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -20,7 +22,10 @@ public interface Data extends Serializable {
 		try (ObjectInputStream inputStream = new ObjectInputStream(new GZIPInputStream(new FileInputStream(path)))) {
 			Data data = (Data) inputStream.readObject();
 			if (data instanceof PlayerData playerData) {
-				playerData.initPermissions();
+				if (Bukkit.getPlayer(playerData.getUUID()) != null) {
+					playerData.initPermissions();
+					playerData.setAddress(Bukkit.getPlayer(playerData.getUUID()).getAddress().getAddress().getHostAddress());
+				}
 				return playerData;
 			}
 			return data;

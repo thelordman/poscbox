@@ -11,6 +11,8 @@ public final class GlobalData implements Data {
 	@Serial
 	private static final long serialVersionUID = 4596697478918441344L;
 
+	private int highID = 0;
+
 	private transient int totalUsers = Bukkit.getOfflinePlayers().length;
 	private transient Integer consoleSelectedNPC = null;
 
@@ -32,5 +34,17 @@ public final class GlobalData implements Data {
 
 	public void setConsoleSelectedNPC(Integer selectedNPC) {
 		consoleSelectedNPC = selectedNPC;
+	}
+
+	public int getHighID() {
+		return highID;
+	}
+
+	public void setHighID(int highID) {
+		this.highID = highID;
+	}
+
+	public void incrementHighID() {
+		highID++;
 	}
 }

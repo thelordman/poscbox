@@ -33,3 +33,32 @@ commands:
   rank:
     description: Modify ranks of players.
     usage: /rank <player> <set> <rank>
+  punishments:
+    description: Shows you the punishment history of an offline player or yourself.
+    usage: /punishments [player]
+  mute:
+    description: Mute a player.
+    usage: /mute <player> [time | perm] [reason] [-s]
+  unmute:
+    description: Unmute a player.
+    usage: /unmute <player> [-s]
+  kick:
+    description: Kick a player.
+    usage: /kick <player> [reason] [-s]
+  warn:
+    description: Warn a player.
+    usage: /warn <player> [reason] [-s]
+  ban:
+    description: Ban a player.
+    usage: /ban <player> [time | perm] [reason] [-s]
+  unban:
+    description: Ban a player.
+    usage: /unban <player> [-s]
+  ipban:
+    description: Ban the IP address of a player.
+    aliases: banip
+    usage: /ipban <player> [time | perm] [reason] [-s]
+  unipban:
+    description: Unban the IP address of a player.
+    aliases: unbanip
+    usage: /unipban <player> [-s]
