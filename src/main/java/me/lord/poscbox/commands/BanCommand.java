@@ -46,18 +46,18 @@ public class BanCommand implements Cmd {
 		}
 
 		String msg = "&f" + target.getName() + " &6has been banned by &f" + sender.getName() +
-				" &6for &f" + reason + " &8| &f" + args[1] + "&6.";
+				" &6for &f" + reason + " &8| &f" + (args.length == 1 ? "perm" : args[1]) + "&6.";
 		if (args[args.length - 1].equals("-s")) {
 			for (Player player : Bukkit.getOnlinePlayers()) {
 				if (player.hasPermission("poscbox.staff")) player.sendMessage(TextUtil.c(msg + " &7[&6Silent&7]"));
 			}
 		} else Bukkit.broadcast(TextUtil.c(msg));
 		if (target.isOnline()) target.getPlayer().sendMessage(TextUtil.c("\n&cYou've been banned by &f" + sender.getName() +
-				" &cfor &f" + reason + " &8| &f" + args[1] + "&c.\n"));
+				" &cfor &f" + reason + " &8| &f" + (args.length == 1 ? "perm" : args[1]) + "&c.\n"));
 
 		target.banPlayer(reason, Date.dateFromSecs(time), null, true);
 		PunishmentManager.addPunishment(target.getUniqueId(), new Punishment(PunishmentType.BAN,
-				args[1].toLowerCase().startsWith("perm") ? null : time, reason,
+				args.length == 1 || args[1].toLowerCase().startsWith("perm") ? null : time, reason,
 				sender instanceof Player ? ((Player) sender).getUniqueId() : null));
 
 		return true;

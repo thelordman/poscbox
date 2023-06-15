@@ -41,7 +41,7 @@ public class UnIpBanCommand implements Cmd {
 			for (Player player : Bukkit.getOnlinePlayers()) {
 				if (player.hasPermission("poscbox.staff")) player.sendMessage(TextUtil.c(msg + " &7[&6Silent&7]"));
 			}
-		} else Bukkit.broadcastMessage(msg);
+		} else Bukkit.broadcast(TextUtil.c(msg));
 
 		Bukkit.getBanList(BanList.Type.IP).pardon(DataManager.getPlayerDataCopy(target.getUniqueId()).getAddress());
 

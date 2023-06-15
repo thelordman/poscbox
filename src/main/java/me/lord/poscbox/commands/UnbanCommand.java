@@ -36,7 +36,7 @@ public class UnbanCommand implements Cmd {
 			for (Player player : Bukkit.getOnlinePlayers()) {
 				if (player.hasPermission("poscbox.staff")) player.sendMessage(TextUtil.c(msg + " &7[&6Silent&7]"));
 			}
-		} else Bukkit.broadcastMessage(msg);
+		} else Bukkit.broadcast(TextUtil.c(msg));
 
 		if (target.isOnline()) target.getPlayer().sendMessage(TextUtil.c("\n&cYou've been unbanned by &f" + sender.getName() + "&c.\n"));
 		Bukkit.getBanList(BanList.Type.NAME).pardon(target.getName());
