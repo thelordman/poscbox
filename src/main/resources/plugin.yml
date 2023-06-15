@@ -19,9 +19,6 @@ commands:
   gmsp:
     description: Changes your or an online player's gamemode to spectator.
     usage: /gmsp [<player>]
-  shop:
-    description: Opens the wool shop.
-    usage: /shop
   joinkit:
     description: Give the Join Kit to a player.
     usage: /joinkit [<player>]
