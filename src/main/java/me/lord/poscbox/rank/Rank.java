@@ -1,25 +1,30 @@
 package me.lord.poscbox.rank;
 
+import me.lord.poscbox.data.DataManager;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
 import java.util.Arrays;
+import java.util.UUID;
 
 public enum Rank {
-	KNIGHT("&2Knight", "poscbox.donator"),
-	EMPEROR("&eEmperor", "poscbox.donator"),
-	ELDER("&3Elder", "poscbox.donator"),
-	HERO("&bHero", "poscbox.donator"),
-	LEGEND("&6Legend", "poscbox.donator"),
-
-	JR_DEVELOPER("&dJr. Developer", "poscbox.donator", "poscbox.staff"),
-	JR_MOD("&aJr. Mod", "poscbox.donator", "poscbox.staff"),
-	MOD("&eMod", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.spectator", "poscbox.command.gamemode.survival"),
-	SR_MOD("&6Sr. Mod", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*"),
-	BUILDER("&9Builder", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.creative", "poscbox.command.gamemode.survival", "poscbox.command.gamemode.spectator", "poscbox.command.joinkit"),
-	ADMIN("&cAdmin", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
-	DEVELOPER("&dDeveloper", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
+	OWNER("&4Owner", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
 	HEAD_DEVELOPER("&5Head Developer", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
-	OWNER("&4Owner", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank");
+	DEVELOPER("&dDeveloper", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
+	ADMIN("&cAdmin", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
+	BUILDER("&9Builder", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.creative", "poscbox.command.gamemode.survival", "poscbox.command.gamemode.spectator", "poscbox.command.joinkit"),
+	SR_MOD("&6Sr. Mod", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*"),
+	MOD("&eMod", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.spectator", "poscbox.command.gamemode.survival"),
+	JR_MOD("&aJr. Mod", "poscbox.donator", "poscbox.staff"),
+	JR_DEVELOPER("&dJr. Developer", "poscbox.donator", "poscbox.staff"),
+
+	LEGEND("&6Legend", "poscbox.donator"),
+	HERO("&bHero", "poscbox.donator"),
+	ELDER("&3Elder", "poscbox.donator"),
+	EMPEROR("&eEmperor", "poscbox.donator"),
+	KNIGHT("&2Knight", "poscbox.donator");
 
 	private final String[] permissions;
 	private final String display;
@@ -46,5 +51,21 @@ public enum Rank {
 			}
 		}
 		return false;
+	}
+
+	public static Rank get(OfflinePlayer player) {
+		return get(player.getUniqueId());
+	}
+
+	public static Rank get(Player player) {
+		return DataManager.getPlayerData(player).getRank();
+	}
+
+	public static Rank get(UUID uuid) {
+		if (Bukkit.getOfflinePlayer(uuid).isOnline()) {
+			return get(Bukkit.getOfflinePlayer(uuid).getPlayer());
+		} else {
+			return DataManager.getPlayerDataCopy(uuid).getRank();
+		}
 	}
 }

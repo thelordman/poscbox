@@ -2,6 +2,7 @@ package me.lord.poscbox.data;
 
 import me.lord.poscbox.PoscBox;
 import me.lord.poscbox.gui.GUI;
+import me.lord.poscbox.punishment.Punishment;
 import me.lord.poscbox.rank.Rank;
 import me.lord.poscbox.scoreboard.FastBoard;
 import me.lord.poscbox.utilities.TextUtil;
@@ -13,6 +14,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.Serial;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -27,6 +30,9 @@ public final class PlayerData implements Data {
 	private double balance = 0d;
 	private int killstreak = 0;
 	private Rank rank = null;
+	private final ArrayList<Punishment> punishments = new ArrayList<>();
+	private Integer muted = 0;
+	private String address;
 
 	private transient PermissionAttachment permissionAttachment = null;
 	private transient Integer selectedNPC = null;
@@ -35,7 +41,6 @@ public final class PlayerData implements Data {
 	private transient FastBoard scoreboard;
 	private transient boolean droppedEquipment = false;
 	private transient GUI currentGUI = null;
-
 
 
 	public static double getBalance(UUID uuid) {
@@ -48,15 +53,20 @@ public final class PlayerData implements Data {
 
 	public PlayerData(@NotNull UUID uuid) {
 		this.uuid = uuid;
-		scoreboard = new FastBoard(uuid);
+		address = null;
+		if (Bukkit.getPlayer(uuid) != null) {
+			address = Bukkit.getPlayer(uuid).getAddress().getAddress().getHostAddress();
+		}
 		initPermissions();
 	}
 
-	public PlayerData(PlayerData playerData) {
+	public PlayerData(@NotNull PlayerData playerData) {
 		uuid = playerData.uuid;
 		balance = playerData.balance;
 		killstreak = playerData.killstreak;
 		rank = playerData.rank;
+		muted = playerData.muted;
+		address = playerData.address;
 
 		selectedNPC = playerData.selectedNPC;
 		godMode = playerData.godMode;
@@ -109,7 +119,7 @@ public final class PlayerData implements Data {
 	}
 
 	public FastBoard getScoreboard() {
-		if (scoreboard == null) {
+		if (scoreboard == null && Bukkit.getPlayer(uuid) != null) {
 			scoreboard = new FastBoard(uuid);
 		}
 		return scoreboard;
@@ -178,5 +188,40 @@ public final class PlayerData implements Data {
 				permissionAttachment = null;
 			}
 		}
+	}
+
+	public ArrayList<Punishment> getPunishments() {
+		return punishments;
+	}
+
+	public void addPunishment(Punishment punishment) {
+		this.punishments.add(punishment);
+	}
+
+	public boolean removePunishment(int ID) {
+		for (Punishment punishment : punishments) {
+			if (punishment.getID() == ID) {
+				punishments.remove(punishment);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isMuted() {
+		if (muted == null) return true;
+		return muted > Instant.now().getEpochSecond();
+	}
+
+	public void setMuted(Integer muted) {
+		this.muted = muted;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }

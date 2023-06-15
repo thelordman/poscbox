@@ -93,7 +93,11 @@ public class DataManager {
 
 	public static PlayerData getPlayerDataCopy(UUID uuid) {
 		PlayerData playerData = playerDataMap.containsKey(uuid) ? getPlayerData(uuid) : getPlayerDataFromFile(uuid);
-		return new PlayerData(playerData);
+		if (playerData == null) {
+			return new PlayerData(uuid);
+		} else {
+			return new PlayerData(playerData);
+		}
 	}
 
 	/**
@@ -101,9 +105,11 @@ public class DataManager {
 	 */
 	public static void modifyPlayerData(UUID uuid, Consumer<PlayerData> consumer) {
 		PlayerData playerData = playerDataMap.containsKey(uuid) ? getPlayerData(uuid) : getPlayerDataFromFile(uuid);
-		if (playerData != null) {
+		if (playerData == null) {
+			playerData = new PlayerData(uuid);
+		} else {
 			consumer.accept(playerData);
-			playerData.serialize(PLAYER_DATA_FOLDER.getPath() + File.separator + uuid + ".dat");
 		}
+		playerData.serialize(PLAYER_DATA_FOLDER.getPath() + File.separator + uuid + ".dat");
 	}
 }
