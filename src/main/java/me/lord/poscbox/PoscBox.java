@@ -4,8 +4,10 @@ import com.sun.management.OperatingSystemMXBean;
 import me.lord.poscbox.data.DataManager;
 import me.lord.poscbox.data.PlayerData;
 import me.lord.poscbox.discord.Discord;
+import me.lord.poscbox.rank.Rank;
 import me.lord.poscbox.utilities.Cmd;
 import me.lord.poscbox.utilities.ReflectionUtil;
+import me.lord.poscbox.utilities.TeamUtil;
 import me.lord.poscbox.utilities.TextUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
@@ -44,6 +46,8 @@ public final class PoscBox extends JavaPlugin {
 		registerCommands();
 
 		Discord.enable();
+
+		TeamUtil.loadTeams();
 
 		Bukkit.getScheduler().runTaskTimer(get(), () -> {
 			for (Player player : Bukkit.getOnlinePlayers()) {
@@ -137,6 +141,7 @@ public final class PoscBox extends JavaPlugin {
 	// TODO: Sort TAB list according to rank
 	public static void updateTab(Player player) {
 		player.sendPlayerListHeader(TextUtil.c("\n&6&lPoscBox\n"));
+		player.playerListName(player.displayName());
 		player.sendPlayerListFooter(TextUtil.c("\n   &6Online&7: &f" + TextUtil.format(onlinePlayers) + " &8| " +
 				"&6Ping&7: &f" + TextUtil.format(player.getPing()) + " &8| " +
 				"&6TPS&7: &f" + TextUtil.format(Bukkit.getTPS()[0]) + " &8| " +

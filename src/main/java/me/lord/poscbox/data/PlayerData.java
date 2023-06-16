@@ -5,6 +5,7 @@ import me.lord.poscbox.gui.GUI;
 import me.lord.poscbox.punishment.Punishment;
 import me.lord.poscbox.rank.Rank;
 import me.lord.poscbox.scoreboard.FastBoard;
+import me.lord.poscbox.utilities.TeamUtil;
 import me.lord.poscbox.utilities.TextUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -162,6 +163,9 @@ public final class PlayerData implements Data {
 	}
 
 	public void setRank(Rank rank) {
+		Player player = Bukkit.getPlayer(uuid);
+		if (TeamUtil.board.getPlayerTeam(player) != null)
+			TeamUtil.board.getPlayerTeam(player).removePlayer(player);
 		this.rank = rank;
 		initPermissions();
 		if (Bukkit.getPlayer(getUUID()) != null) {
@@ -171,6 +175,10 @@ public final class PlayerData implements Data {
 				Bukkit.getPlayer(getUUID()).displayName(TextUtil.c(rank.getDisplay() + " &8| &f" + Bukkit.getPlayer(getUUID()).getName()));
 			}
 		}
+		if (rank != null)
+			TeamUtil.board.getTeam(String.valueOf(rank.getTabPlacement())).addPlayer(player);
+		else
+			TeamUtil.board.getTeam("z").addPlayer(player);
 	}
 
 	public void initPermissions() {

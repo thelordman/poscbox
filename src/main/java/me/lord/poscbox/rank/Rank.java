@@ -10,32 +10,38 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public enum Rank {
-	OWNER("&4Owner", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
-	HEAD_DEVELOPER("&5Head Developer", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
-	DEVELOPER("&dDeveloper", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
-	ADMIN("&cAdmin", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
-	BUILDER("&9Builder", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.creative", "poscbox.command.gamemode.survival", "poscbox.command.gamemode.spectator", "poscbox.command.joinkit"),
-	SR_MOD("&6Sr. Mod", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*"),
-	MOD("&eMod", "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.spectator", "poscbox.command.gamemode.survival"),
-	JR_MOD("&aJr. Mod", "poscbox.donator", "poscbox.staff"),
-	JR_DEVELOPER("&dJr. Developer", "poscbox.donator", "poscbox.staff"),
+	OWNER("&4Owner", 'a', "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
+	HEAD_DEVELOPER("&5Head Developer", 'b', "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
+	DEVELOPER("&dDeveloper", 'c', "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
+	ADMIN("&cAdmin", 'd', "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank"),
+	BUILDER("&9Builder", 'e', "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.creative", "poscbox.command.gamemode.survival", "poscbox.command.gamemode.spectator", "poscbox.command.joinkit"),
+	SR_MOD("&6Sr. Mod", 'f', "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*"),
+	MOD("&eMod", 'g', "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.spectator", "poscbox.command.gamemode.survival"),
+	JR_MOD("&aJr. Mod", 'h', "poscbox.donator", "poscbox.staff"),
+	JR_DEVELOPER("&dJr. Developer", 'i', "poscbox.donator", "poscbox.staff"),
 
-	LEGEND("&6Legend", "poscbox.donator"),
-	HERO("&bHero", "poscbox.donator"),
-	ELDER("&3Elder", "poscbox.donator"),
-	EMPEROR("&eEmperor", "poscbox.donator"),
-	KNIGHT("&2Knight", "poscbox.donator");
+	LEGEND("&6Legend", 'j', "poscbox.donator"),
+	HERO("&bHero", 'k', "poscbox.donator"),
+	ELDER("&3Elder", 'l', "poscbox.donator"),
+	EMPEROR("&eEmperor", 'm', "poscbox.donator"),
+	KNIGHT("&2Knight", 'n', "poscbox.donator");
 
 	private final String[] permissions;
+	private final char tabPlacement;
 	private final String display;
 
-	Rank(String display, String... permissions) {
+	Rank(String display, char tabPlacement, String... permissions) {
 		this.permissions = permissions;
+		this.tabPlacement = tabPlacement;
 		this.display = display;
 	}
 
 	public String getDisplay() {
 		return display;
+	}
+
+	public char getTabPlacement() {
+		return tabPlacement;
 	}
 
 	public Permission[] getPermissions() {
