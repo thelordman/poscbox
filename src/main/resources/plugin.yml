@@ -62,3 +62,7 @@ commands:
     description: Unban the IP address of a player.
     aliases: unbanip
     usage: /unipban <player> [-s]
+  enderchest:
+    description: Open your enderchest.
+    aliases: ec
+    usage: /enderchest [player]

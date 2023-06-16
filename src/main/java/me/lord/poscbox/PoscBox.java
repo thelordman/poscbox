@@ -17,6 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.InvocationTargetException;
+import java.time.Instant;
 import java.util.logging.Logger;
 
 public final class PoscBox extends JavaPlugin {
@@ -40,8 +41,12 @@ public final class PoscBox extends JavaPlugin {
 		DataManager.loadAll();
 
 		configureServer();
+
+		logger.info("Registering listeners and commands");
+		Instant time = Instant.now();
 		registerListeners();
 		registerCommands();
+		logger.info("Registration completed in " + Instant.now().minusMillis(time.toEpochMilli()) + " ms");
 
 		Discord.enable();
 
