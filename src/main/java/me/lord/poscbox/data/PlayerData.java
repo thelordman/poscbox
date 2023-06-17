@@ -8,6 +8,7 @@ import me.lord.poscbox.scoreboard.FastBoard;
 import me.lord.poscbox.utilities.TextUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +17,9 @@ import org.jetbrains.annotations.Nullable;
 import java.io.Serial;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
+import java.util.function.IntFunction;
 
 /**
  * A player's data which won't be wiped on a server reload or a server restart.
@@ -33,6 +36,7 @@ public final class PlayerData implements Data {
 	private final ArrayList<Punishment> punishments = new ArrayList<>();
 	private Integer muted = 0;
 	private String address;
+	private byte[][] vault = new byte[54][];
 
 	private transient PermissionAttachment permissionAttachment = null;
 	private transient Integer selectedNPC = null;
@@ -223,5 +227,21 @@ public final class PlayerData implements Data {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public ItemStack[] getVault() {
+		ItemStack[] items = new ItemStack[54];
+
+		for (int i = 0; i < 54; i++) {
+			items[i] = vault[i] == null ? null : ItemStack.deserializeBytes(vault[i]);
+		}
+
+		return items;
+	}
+
+	public void setVault(ItemStack[] vault) {
+		for (int i = 0; i < 54; i++) {
+			this.vault[i] = vault[i] == null ? null : vault[i].serializeAsBytes();
+		}
 	}
 }

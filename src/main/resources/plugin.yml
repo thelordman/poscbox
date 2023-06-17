@@ -63,3 +63,6 @@ commands:
     description: Open your enderchest.
     aliases: ec
     usage: /enderchest [player]
+  vault:
+    description: Open your vault.
+    usage: /vault [player]

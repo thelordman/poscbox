@@ -20,11 +20,11 @@ public enum Rank {
 	JR_MOD("&aJr. Mod", "poscbox.donator", "poscbox.staff"),
 	JR_DEVELOPER("&dJr. Developer", "poscbox.donator", "poscbox.staff"),
 
-	LEGEND("&6Legend", "poscbox.donator"),
-	HERO("&bHero", "poscbox.donator"),
-	ELDER("&3Elder", "poscbox.donator"),
-	EMPEROR("&eEmperor", "poscbox.donator"),
-	KNIGHT("&2Knight", "poscbox.donator");
+	LEGEND("&6Legend", "poscbox.donator", "poscbox.command.enderchest", "poscbox.glow.*", "poscbox.command.vault"),
+	HERO("&bHero", "poscbox.donator", "poscbox.command.enderchest", "poscbox.glow.yellow", "poscbox.glow.dark_aqua", "poscbox.glow.aqua", "poscbox.command.vault"),
+	ELDER("&3Elder", "poscbox.donator", "poscbox.command.enderchest", "poscbox.glow.yellow", "poscbox.glow.dark_aqua", "poscbox.command.vault"),
+	EMPEROR("&eEmperor", "poscbox.donator", "poscbox.command.enderchest", "poscbox.glow.yellow", "poscbox.command.vault"),
+	KNIGHT("&2Knight", "poscbox.donator", "poscbox.command.enderchest");
 
 	private final String[] permissions;
 	private final String display;
