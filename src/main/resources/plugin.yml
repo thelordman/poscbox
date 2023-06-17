@@ -72,3 +72,6 @@ commands:
   hat:
     description: Equip an item as a hat.
     usage: /hat
+  trail:
+    description: Sets trail
+    usage: /trail <particle>

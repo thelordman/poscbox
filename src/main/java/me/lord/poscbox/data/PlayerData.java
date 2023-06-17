@@ -19,9 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.Serial;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
-import java.util.function.IntFunction;
 
 /**
  * A player's data which won't be wiped on a server reload or a server restart.
@@ -47,6 +45,7 @@ public final class PlayerData implements Data {
 	private transient FastBoard scoreboard;
 	private transient boolean droppedEquipment = false;
 	private transient GUI currentGUI = null;
+	private boolean trail = false;
 
 
 	public static double getBalance(UUID uuid) {
@@ -80,6 +79,15 @@ public final class PlayerData implements Data {
 		scoreboard = playerData.scoreboard;
 		droppedEquipment = playerData.droppedEquipment;
 		currentGUI = playerData.currentGUI;
+		trail = false;
+	}
+
+	public boolean hasTrail() {
+		return trail;
+	}
+
+	public void setTrail(boolean trail) {
+		this.trail = trail;
 	}
 
 	@Nullable
