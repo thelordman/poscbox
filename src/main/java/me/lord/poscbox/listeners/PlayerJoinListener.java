@@ -4,8 +4,9 @@ import me.lord.poscbox.PoscBox;
 import me.lord.poscbox.data.DataManager;
 import me.lord.poscbox.discord.events.PlayerJoin;
 import me.lord.poscbox.item.ItemManager;
-import me.lord.poscbox.scoreboard.FastBoard;
+import me.lord.poscbox.rank.Rank;
 import me.lord.poscbox.utilities.PacketListener;
+import me.lord.poscbox.utilities.TeamUtil;
 import me.lord.poscbox.utilities.TextUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -33,11 +34,17 @@ public class PlayerJoinListener implements Listener {
 			DataManager.getPlayerData(player).getScoreboard().updateTitle();
 		}
 
+		if (TeamUtil.board.getPlayerTeam(event.getPlayer()) != null)
+			TeamUtil.board.getPlayerTeam(event.getPlayer()).removePlayer(event.getPlayer());
+
 		if (DataManager.getPlayerData(event.getPlayer()).getRank() == null) {
 			event.getPlayer().displayName(null);
+			if (!TeamUtil.board.getTeam("z").hasPlayer(event.getPlayer()))
+				TeamUtil.board.getTeam("z").addPlayer(event.getPlayer());
 		} else {
 			event.getPlayer().displayName(TextUtil.c(DataManager.getPlayerData(event.getPlayer()).getRank().getDisplay() + " &8| &f" + event.getPlayer().getName()));
 		}
+		TeamUtil.board.getTeam(String.valueOf(DataManager.getPlayerData(event.getPlayer()).getRank().getTabPlacement())).addPlayer(event.getPlayer());
 
 		event.joinMessage(TextUtil.c("&7[&a+&7] &f" + event.getPlayer().getDisplayName() + (event.getPlayer().hasPlayedBefore() ? "" : " &8| &6" + TextUtil.ordinal(DataManager.getGlobal().getTotalUsers()) + " join")));
 
