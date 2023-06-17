@@ -9,14 +9,12 @@ import me.lord.poscbox.utilities.Cmd;
 import me.lord.poscbox.utilities.ReflectionUtil;
 import me.lord.poscbox.utilities.TeamUtil;
 import me.lord.poscbox.utilities.TextUtil;
-import org.bukkit.Bukkit;
-import org.bukkit.Difficulty;
-import org.bukkit.GameRule;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
@@ -41,6 +39,21 @@ public final class PoscBox extends JavaPlugin {
 		onlinePlayers = Bukkit.getOnlinePlayers().size();
 
 		DataManager.loadAll();
+
+		for (String name : DataManager.getGlobal().getWorlds()) {
+			if (Bukkit.getWorld(name) != null) {
+				continue;
+			}
+			File file = new File(name);
+			if (!file.exists() || !new File(name + File.separator + "level.dat").exists()) {
+				logger.warning("No data for world " + name + " found, generating new world");
+				Bukkit.createWorld(WorldCreator.name(name));
+			} else {
+				WorldCreator.name(name).createWorld();
+			}
+		}
+		Bukkit.createWorld(WorldCreator.name("poscbox"));
+		Bukkit.createWorld(WorldCreator.name("world"));
 
 		configureServer();
 

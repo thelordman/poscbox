@@ -3,6 +3,7 @@ package me.lord.poscbox.data;
 import org.bukkit.Bukkit;
 
 import java.io.Serial;
+import java.util.ArrayList;
 
 /**
  * Stores data that is global (not attached to an entity, item or a block).
@@ -12,6 +13,7 @@ public final class GlobalData implements Data {
 	private static final long serialVersionUID = 4596697478918441344L;
 
 	private int highID = 0;
+	private final ArrayList<String> worlds = new ArrayList<>();
 
 	private transient int totalUsers = Bukkit.getOfflinePlayers().length;
 	private transient Integer consoleSelectedNPC = null;
@@ -46,5 +48,9 @@ public final class GlobalData implements Data {
 
 	public void incrementHighID() {
 		highID++;
+	}
+
+	public ArrayList<String> getWorlds() {
+		return worlds;
 	}
 }
