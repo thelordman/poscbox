@@ -47,8 +47,6 @@ public class PlayerJoinListener implements Listener {
 		}
 		TeamUtil.board.getTeam(String.valueOf(DataManager.getPlayerData(event.getPlayer()).getRank().getTabPlacement())).addPlayer(event.getPlayer());
 
-		Bukkit.getOnlinePlayers().forEach(e -> e.hidePlayer(PoscBox.get(), event.getPlayer()));
-		Bukkit.getOnlinePlayers().forEach(e -> e.showPlayer(PoscBox.get(), event.getPlayer()));
 		event.joinMessage(TextUtil.c("&7[&a+&7] &f" + event.getPlayer().getDisplayName() + (event.getPlayer().hasPlayedBefore() ? "" : " &8| &6" + TextUtil.ordinal(DataManager.getGlobal().getTotalUsers()) + " join")));
 
 		PlayerJoin.exe(event);
