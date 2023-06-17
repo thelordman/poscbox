@@ -184,8 +184,6 @@ public final class PlayerData implements Data {
 			TeamUtil.board.getTeam(String.valueOf(rank.getTabPlacement())).addPlayer(player);
 		else
 			TeamUtil.board.getTeam("z").addPlayer(player);
-		Bukkit.getOnlinePlayers().forEach(e -> e.hidePlayer(PoscBox.get(), player));
-		Bukkit.getOnlinePlayers().forEach(e -> e.showPlayer(PoscBox.get(), player));
 	}
 
 	public void initPermissions() {
