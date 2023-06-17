@@ -16,13 +16,10 @@ public class VanillaEnchant extends ItemStackReference implements Enchant {
 	private final String key;
 
 	public static boolean isValid(String key) {
-		if (TextUtil.isAny(key, "sharpness", "knockback", "sweeping",
+		return TextUtil.isAny(key, "sharpness", "knockback", "sweeping",
 				"fire_aspect", "protection", "fire_protection",
 				"projectile_protection", "blast_protection", "thorns",
-				"swift_sneak")) {
-			return true;
-		}
-		return false;
+				"swift_sneak", "efficiency");
 	}
 
 	public VanillaEnchant(ItemStack item, Enchantment enchantment) {
@@ -143,6 +140,16 @@ public class VanillaEnchant extends ItemStackReference implements Enchant {
 						case 2 -> 35000d;
 						case 3 -> 75000d;
 						case 4 -> 125000d;
+						default -> 0d;
+					};
+			case "efficiency" ->
+					switch (level) {
+						case 1 -> 50d;
+						case 2 -> 250d;
+						case 3 -> 1000d;
+						case 4 -> 7500d;
+						case 5 -> 25000d;
+						case 6 -> 250000d;
 						default -> 0d;
 					};
 			default -> throw new RuntimeException("Illegal enchant key");

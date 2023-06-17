@@ -38,8 +38,8 @@ public final class PlayerData implements Data {
 	private String address;
 	private byte[][] vault = new byte[54][];
 
-	private transient PermissionAttachment permissionAttachment = null;
 	private transient Integer selectedNPC = null;
+	private transient PermissionAttachment permissionAttachment = null;
 	private transient boolean godMode = false;
 	private transient boolean hunger = true;
 	private transient FastBoard scoreboard;
@@ -260,5 +260,13 @@ public final class PlayerData implements Data {
 		for (int i = 0; i < 54; i++) {
 			this.vault[i] = vault[i] == null ? null : vault[i].serializeAsBytes();
 		}
+	}
+
+	public Integer getSelectedNPC() {
+		return selectedNPC;
+	}
+
+	public void setSelectedNPC(Integer selectedNPC) {
+		this.selectedNPC = selectedNPC;
 	}
 }

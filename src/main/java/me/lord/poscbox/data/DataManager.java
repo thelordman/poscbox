@@ -1,12 +1,16 @@
 package me.lord.poscbox.data;
 
 import me.lord.poscbox.PoscBox;
+import me.lord.poscbox.npc.NPC;
+import me.lord.poscbox.npc.NPCManager;
 import me.lord.poscbox.scoreboard.FastBoard;
 import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.v1_19_R3.util.DatFileFilter;
 import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
 
@@ -14,6 +18,7 @@ public class DataManager {
 	private static final HashMap<UUID, PlayerData> playerDataMap = new HashMap<>();
 
 	public static final File PLAYER_DATA_FOLDER = new File(PoscBox.get().getDataFolder() + File.separator + "playerdata");
+	public static final File NPC_DATA_FOLDER = new File(PoscBox.get().getDataFolder() + File.separator + "npcdata");
 	public static final File GLOBAL_DATA_FILE = new File(PoscBox.get().getDataFolder() + File.separator + "globaldata.dat");
 
 	private static GlobalData globalData = null;
@@ -55,6 +60,13 @@ public class DataManager {
 			loadPlayerData(player);
 			getPlayerData(player).getScoreboard().updateAll();
 		}
+
+		if (!NPC_DATA_FOLDER.exists()) NPC_DATA_FOLDER.mkdir();
+		for (File file : NPC_DATA_FOLDER.listFiles(new DatFileFilter())) {
+			NPCData npcData = (NPCData) Data.deserialize(file.getPath());
+			assert npcData != null : "Wrong and/or corrupted file at " + file.getPath();
+			NPCManager.createNPC(npcData.getName(), npcData.getLocation(), npcData.getSkin(), Integer.parseInt(file.getName().split("\\.")[0]));
+		}
 	}
 
 	public static void saveAll() {
@@ -68,6 +80,17 @@ public class DataManager {
 
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			savePlayerData(player);
+
+			NPCManager.sendRemovePacketAll(player);
+		}
+
+		NPCManager.getNPCMap().values().forEach(
+				npc -> PoscBox.mainWorld.getEntity(npc.getInteractionId()).remove()
+		);
+
+		if (!NPC_DATA_FOLDER.exists()) NPC_DATA_FOLDER.mkdir();
+		for (Map.Entry<Integer, NPC> entry : NPCManager.getNPCMap().entrySet()) {
+			NPCData.fromNPC(entry.getValue()).serialize(NPC_DATA_FOLDER.getPath() + File.separator + entry.getKey() + ".dat");
 		}
 	}
 
