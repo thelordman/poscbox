@@ -69,3 +69,6 @@ commands:
   glow:
     description: Make yourself glow.
     usage: /glow
+  hat:
+    description: Equip an item as a hat.
+    usage: /hat

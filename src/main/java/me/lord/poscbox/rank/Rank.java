@@ -21,11 +21,11 @@ public enum Rank {
 	JR_MOD("&aJr. Mod", "§l§r", NamedTextColor.GREEN, "poscbox.donator", "poscbox.staff"),
 	JR_DEVELOPER("&dJr. Developer", "§m§r", NamedTextColor.LIGHT_PURPLE, "poscbox.donator", "poscbox.staff"),
 
-	LEGEND("&6Legend", "§n§r", NamedTextColor.GOLD, "poscbox.donator"),
-	HERO("&bHero", "§o§r", NamedTextColor.AQUA, "poscbox.donator"),
-	ELDER("&3Elder", "§r§r", NamedTextColor.DARK_AQUA, "poscbox.donator"),
-	EMPEROR("&eEmperor", "§r§r§r", NamedTextColor.YELLOW, "poscbox.donator"),
-	KNIGHT("&2Knight", "§r§r§r§r", NamedTextColor.DARK_GREEN, "poscbox.donator");
+	LEGEND("&6Legend", "§n§r", NamedTextColor.GOLD, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat"),
+	HERO("&bHero", "§o§r", NamedTextColor.AQUA, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat"),
+	ELDER("&3Elder", "§r§r", NamedTextColor.DARK_AQUA, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat"),
+	EMPEROR("&eEmperor", "§r§r§r", NamedTextColor.YELLOW, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault"),
+	KNIGHT("&2Knight", "§r§r§r§r", NamedTextColor.DARK_GREEN, "poscbox.donator", "poscbox.command.enderchest");
 
 	private final String[] permissions;
 	private final NamedTextColor teamColor;
