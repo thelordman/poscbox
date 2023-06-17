@@ -12,7 +12,6 @@ public class TeamUtil {
     public static Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
 
     public static void loadTeams() {
-        board.getTeams().forEach(Team::unregister);
         String name;
         for (Rank rank : Rank.values()) {
             name = String.valueOf(rank.getTabPlacement());
