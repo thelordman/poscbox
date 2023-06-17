@@ -1,5 +1,6 @@
 package me.lord.poscbox.listeners;
 
+import com.destroystokyo.paper.profile.PlayerProfile;
 import me.lord.poscbox.PoscBox;
 import me.lord.poscbox.data.DataManager;
 import me.lord.poscbox.discord.events.PlayerJoin;
@@ -39,13 +40,15 @@ public class PlayerJoinListener implements Listener {
 
 		if (DataManager.getPlayerData(event.getPlayer()).getRank() == null) {
 			event.getPlayer().displayName(null);
-			if (!TeamUtil.board.getTeam("z").hasPlayer(event.getPlayer()))
-				TeamUtil.board.getTeam("z").addPlayer(event.getPlayer());
+			if (!TeamUtil.board.getTeam("§r§r§r§r§r§r§r§r§r§r§r").hasPlayer(event.getPlayer()))
+				TeamUtil.board.getTeam("§r§r§r§r§r§r§r§r§r§r§r").addPlayer(event.getPlayer());
 		} else {
 			event.getPlayer().displayName(TextUtil.c(DataManager.getPlayerData(event.getPlayer()).getRank().getDisplay() + " &8| &f" + event.getPlayer().getName()));
 		}
 		TeamUtil.board.getTeam(String.valueOf(DataManager.getPlayerData(event.getPlayer()).getRank().getTabPlacement())).addPlayer(event.getPlayer());
 
+		Bukkit.getOnlinePlayers().forEach(e -> e.hidePlayer(PoscBox.get(), event.getPlayer()));
+		Bukkit.getOnlinePlayers().forEach(e -> e.showPlayer(PoscBox.get(), event.getPlayer()));
 		event.joinMessage(TextUtil.c("&7[&a+&7] &f" + event.getPlayer().getDisplayName() + (event.getPlayer().hasPlayedBefore() ? "" : " &8| &6" + TextUtil.ordinal(DataManager.getGlobal().getTotalUsers()) + " join")));
 
 		PlayerJoin.exe(event);
