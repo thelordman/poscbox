@@ -66,3 +66,6 @@ commands:
   vault:
     description: Open your vault.
     usage: /vault [player]
+  glow:
+    description: Make yourself glow.
+    usage: /glow
