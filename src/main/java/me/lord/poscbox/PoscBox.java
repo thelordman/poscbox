@@ -51,7 +51,6 @@ public final class PoscBox extends JavaPlugin {
 		logger.info("Registration completed in " + Instant.now().minusMillis(time.toEpochMilli()) + " ms");
 
 		Discord.enable();
-
 		TeamUtil.loadTeams();
 
 		Bukkit.getScheduler().runTaskTimer(get(), () -> {
