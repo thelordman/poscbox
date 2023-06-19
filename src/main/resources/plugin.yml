@@ -78,3 +78,6 @@ commands:
   world:
     description: Command to create and modify Worlds.
     usage: /world <create | list | delete | join> [<name>]
+  npc:
+    description: Command to create and modify NPCs.
+    usage: /npc <create | sel | list | delete | rename | move | skin | help> [<text>]

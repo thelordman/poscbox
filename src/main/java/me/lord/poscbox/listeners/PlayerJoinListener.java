@@ -5,6 +5,7 @@ import me.lord.poscbox.PoscBox;
 import me.lord.poscbox.data.DataManager;
 import me.lord.poscbox.discord.events.PlayerJoin;
 import me.lord.poscbox.item.ItemManager;
+import me.lord.poscbox.npc.NPCManager;
 import me.lord.poscbox.rank.Rank;
 import me.lord.poscbox.utilities.PacketListener;
 import me.lord.poscbox.utilities.TeamUtil;
@@ -31,6 +32,8 @@ public class PlayerJoinListener implements Listener {
 
 		DataManager.loadPlayerData(event.getPlayer());
 		DataManager.getPlayerData(event.getPlayer()).getScoreboard().updateAll();
+
+		NPCManager.sendInitPacketAll(event.getPlayer());
 
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			DataManager.getPlayerData(player).getScoreboard().updateTitle();

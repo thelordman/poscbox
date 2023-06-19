@@ -68,6 +68,8 @@ public final class ItemManager {
 
 		ItemStack sword = new ItemStack(Material.STONE_SWORD);
 
+		ItemStack pickaxe = new ItemStack(Material.WOODEN_PICKAXE);
+
 		ItemStack bread = new ItemStack(Material.BREAD, 64);
 
 		setData(helmet, new HelmetItemData(helmet));
@@ -76,6 +78,8 @@ public final class ItemManager {
 		setData(boots, new BootsItemData(boots));
 
 		setData(sword, new SwordItemData(sword));
+
+		setData(pickaxe, new PickaxeItemData(pickaxe));
 
 		setData(bread, new BreadItemData(bread));
 
@@ -86,6 +90,8 @@ public final class ItemManager {
 
 		player.getInventory().setItem(0, sword);
 
-		player.getInventory().setItem(1, bread);
+		player.getInventory().setItem(1, pickaxe);
+
+		player.getInventory().setItem(2, bread);
 	}
 }

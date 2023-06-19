@@ -17,8 +17,6 @@ dependencies {
     implementation("net.dv8tion", "JDA", "5.0.0-beta.3") {
         exclude("club.minnced", "opus-java")
     }
-    implementation(platform("com.intellectualsites.bom:bom-1.18.x:1.27"))
-    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core")
 }
 
 tasks {
