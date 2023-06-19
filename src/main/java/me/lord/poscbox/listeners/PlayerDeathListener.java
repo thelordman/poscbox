@@ -20,7 +20,7 @@ public class PlayerDeathListener implements Listener {
 		Player attacker = victim.getKiller();
 
 		// GameRule SHOW_DEATH_MESSAGES must be set to false, or it will duplicate
-		Bukkit.broadcast(TextUtil.c("&cDeath &7| &f").append(event.deathMessage()));
+		Bukkit.broadcast(TextUtil.c("&6&lDeath &7| &e").append(event.deathMessage()));
 
 		PlayerData victimData = DataManager.getPlayerData(victim);
 
