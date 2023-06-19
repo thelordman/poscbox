@@ -10,6 +10,7 @@ import me.lord.poscbox.utilities.PacketListener;
 import me.lord.poscbox.utilities.TeamUtil;
 import me.lord.poscbox.utilities.TextUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -48,6 +49,8 @@ public class PlayerJoinListener implements Listener {
 		TeamUtil.board.getTeam(String.valueOf(DataManager.getPlayerData(event.getPlayer()).getRank().getTabPlacement())).addPlayer(event.getPlayer());
 
 		event.joinMessage(TextUtil.c("&7[&a+&7] &f" + event.getPlayer().getDisplayName() + (event.getPlayer().hasPlayedBefore() ? "" : " &8| &6" + TextUtil.ordinal(DataManager.getGlobal().getTotalUsers()) + " join")));
+
+		event.getPlayer().teleport(new Location(Bukkit.getWorld("poscbox"), -163.5, 27, -209.5));
 
 		PlayerJoin.exe(event);
 	}
