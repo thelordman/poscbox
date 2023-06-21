@@ -81,3 +81,6 @@ commands:
   npc:
     description: Command to create and modify NPCs.
     usage: /npc <create | sel | list | delete | rename | move | skin | help> [<text>]
+  spawn:
+    description: Teleports you to the spawn.
+    usage: /spawn

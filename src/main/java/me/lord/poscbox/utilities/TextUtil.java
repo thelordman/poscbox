@@ -30,7 +30,7 @@ public final class TextUtil {
 	}
 
 	public static String stripColorCodes(String string) {
-		return string.replaceAll("§[4c6e2ab319d5f780klmnor]", "");
+		return string.replaceAll("§[4c6e2ab319d5f780klmnor]", "").replaceAll("&[4c6e2ab319d5f780klmnor]", "");
 	}
 
 	public static String stripColorCodes(String string, char c) {

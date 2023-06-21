@@ -3,6 +3,7 @@ package me.lord.poscbox.discord.events;
 import me.lord.poscbox.utilities.PoscBoxEmbedBuilder;
 import me.lord.poscbox.utilities.TextUtil;
 import me.lord.poscbox.discord.Discord;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 

@@ -44,12 +44,13 @@ public class PlayerJoinListener implements Listener {
 
 		if (DataManager.getPlayerData(event.getPlayer()).getRank() == null) {
 			event.getPlayer().displayName(null);
-			if (!TeamUtil.board.getTeam("§r§r§r§r§r§r§r§r§r§r§r").hasPlayer(event.getPlayer()))
+			if (TeamUtil.board.getTeam("§r§r§r§r§r§r§r§r§r§r§r") != null && !TeamUtil.board.getTeam("§r§r§r§r§r§r§r§r§r§r§r").hasPlayer(event.getPlayer()))
 				TeamUtil.board.getTeam("§r§r§r§r§r§r§r§r§r§r§r").addPlayer(event.getPlayer());
 		} else {
 			event.getPlayer().displayName(TextUtil.c(DataManager.getPlayerData(event.getPlayer()).getRank().getDisplay() + " &8| &f" + event.getPlayer().getName()));
+			if (TeamUtil.board.getTeam(String.valueOf(DataManager.getPlayerData(event.getPlayer()).getRank().getTabPlacement())) != null)
+				TeamUtil.board.getTeam(String.valueOf(DataManager.getPlayerData(event.getPlayer()).getRank().getTabPlacement())).addPlayer(event.getPlayer());
 		}
-		TeamUtil.board.getTeam(String.valueOf(DataManager.getPlayerData(event.getPlayer()).getRank().getTabPlacement())).addPlayer(event.getPlayer());
 
 		event.joinMessage(TextUtil.c("&7[&a+&7] &f" + event.getPlayer().getDisplayName() + (event.getPlayer().hasPlayedBefore() ? "" : " &8| &6" + TextUtil.ordinal(DataManager.getGlobal().getTotalUsers()) + " join")));
 

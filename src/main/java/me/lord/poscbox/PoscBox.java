@@ -4,9 +4,7 @@ import com.sun.management.OperatingSystemMXBean;
 import me.lord.poscbox.data.DataManager;
 import me.lord.poscbox.data.PlayerData;
 import me.lord.poscbox.discord.Discord;
-import me.lord.poscbox.rank.Rank;
 import me.lord.poscbox.utilities.Cmd;
-import me.lord.poscbox.utilities.LootboxUtil;
 import me.lord.poscbox.utilities.ReflectionUtil;
 import me.lord.poscbox.utilities.TeamUtil;
 import me.lord.poscbox.utilities.TextUtil;
@@ -67,8 +65,6 @@ public final class PoscBox extends JavaPlugin {
 		Discord.enable();
 		TeamUtil.loadTeams();
 
-		LootboxUtil.loadBoxes();
-
 		Bukkit.getScheduler().runTaskTimer(get(), () -> {
 			for (Player player : Bukkit.getOnlinePlayers()) {
 				PlayerData data = DataManager.getPlayerData(player);
@@ -82,7 +78,6 @@ public final class PoscBox extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		LootboxUtil.currentLocation.getBlock().setType(Material.AIR);
 		DataManager.saveAll();
 		Discord.disable();
 	}
