@@ -1,9 +1,12 @@
 package me.lord.poscbox.data;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
 
 import java.io.Serial;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Stores data that is global (not attached to an entity, item or a block).
@@ -17,6 +20,7 @@ public final class GlobalData implements Data {
 
 	private transient int totalUsers = Bukkit.getOfflinePlayers().length;
 	private transient Integer consoleSelectedNPC = null;
+	private transient HashMap<Location, Material> originalMaterials;
 
 	public int getTotalUsers() {
 		return totalUsers;
@@ -52,5 +56,13 @@ public final class GlobalData implements Data {
 
 	public ArrayList<String> getWorlds() {
 		return worlds;
+	}
+
+	public HashMap<Location, Material> getOriginalMaterials() {
+		return originalMaterials;
+	}
+
+	public void setOriginalMaterials(HashMap<Location, Material> originalMaterials) {
+		this.originalMaterials = originalMaterials;
 	}
 }

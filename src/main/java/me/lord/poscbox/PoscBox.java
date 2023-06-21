@@ -4,6 +4,7 @@ import com.sun.management.OperatingSystemMXBean;
 import me.lord.poscbox.data.DataManager;
 import me.lord.poscbox.data.PlayerData;
 import me.lord.poscbox.discord.Discord;
+import me.lord.poscbox.npc.interaction.NPCInteraction;
 import me.lord.poscbox.rank.Rank;
 import me.lord.poscbox.utilities.Cmd;
 import me.lord.poscbox.utilities.LootboxUtil;
@@ -19,6 +20,7 @@ import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
+import java.util.Map;
 import java.util.logging.Logger;
 
 public final class PoscBox extends JavaPlugin {
@@ -58,11 +60,12 @@ public final class PoscBox extends JavaPlugin {
 
 		configureServer();
 
-		logger.info("Registering listeners and commands");
+		logger.info("Registering listeners, commands and NPC interactions");
 		Instant time = Instant.now();
 		registerListeners();
 		registerCommands();
-		logger.info("Registration completed in " + Instant.now().minusMillis(time.toEpochMilli()) + " ms");
+		NPCInteraction.registerInteractions();
+		logger.info("Registration completed in " + Instant.now().minusMillis(time.toEpochMilli()).toEpochMilli() + " ms");
 
 		Discord.enable();
 		TeamUtil.loadTeams();
@@ -82,6 +85,10 @@ public final class PoscBox extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		for (Map.Entry<Location, Material> entry : DataManager.getGlobal().getOriginalMaterials().entrySet()) {
+			entry.getKey().getBlock().setType(entry.getValue());
+		}
+
 		LootboxUtil.currentLocation.getBlock().setType(Material.AIR);
 		DataManager.saveAll();
 		Discord.disable();

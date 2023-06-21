@@ -30,6 +30,10 @@ public class PlayerJoinListener implements Listener {
 			ItemManager.joinKit(event.getPlayer());
 		}
 
+		if (event.getPlayer().getLevel() == 0) {
+			event.getPlayer().setLevel(1);
+		}
+
 		DataManager.loadPlayerData(event.getPlayer());
 		DataManager.getPlayerData(event.getPlayer()).getScoreboard().updateAll();
 

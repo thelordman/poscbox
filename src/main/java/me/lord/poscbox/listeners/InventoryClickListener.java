@@ -24,7 +24,7 @@ public class InventoryClickListener implements Listener {
         }
 
         Player player = (Player) event.getWhoClicked();
-        if (event.getView().getTitle().contains("Enchanter")) {
+        if (event.getView().getTitle().contains("Enchanter") || event.getView().getTitle().contains("Upgrader")) {
             DataManager.getPlayerData(player).getCurrentGUI().onInventoryClick(event);
         }
     }

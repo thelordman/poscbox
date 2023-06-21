@@ -1,6 +1,5 @@
 package me.lord.poscbox.gui;
 
-import me.lord.poscbox.PoscBox;
 import me.lord.poscbox.data.DataManager;
 import me.lord.poscbox.item.ItemManager;
 import me.lord.poscbox.item.data.EnchantItemData;
@@ -100,7 +99,7 @@ public class EnchanterGUI extends ChestGUI {
 	@Override
 	protected void onClick(Player player, int slot, ClickType type) {
 		ItemData enchantData = ItemManager.getData(items[slot]);
-		ItemData data = ItemManager.getData(player.getInventory().getItemInMainHand());
+		ItemData data = ItemManager.getData(player.getInventory().getItem(EquipmentSlot.HAND));
 
 		if (enchantData == null) {
 			return;
@@ -119,44 +118,45 @@ public class EnchanterGUI extends ChestGUI {
 				int newLevelBuy = level + 1;
 				int newLevelSell = level - 1;
 				boolean max = enchant != null && level == enchant.getMaxLevel();
-				if ((max && !type.isRightClick()) || (newLevelSell == -1 && type.isRightClick())) {
+				if ((max && !type.isRightClick()) || (newLevelSell == -1 && type.isRightClick()) || (!type.isLeftClick() && !type.isRightClick())) {
 					return;
 				}
 				double oldCost = enchant == null ? Enchant.of(null, key).getCost(level) : enchant.getCost(level);
 				double cost = enchant == null ? Enchant.of(null, key).getCost(newLevelBuy) : enchant.getCost(newLevelBuy);
 
-				Enchant newEnchant;
+				Enchant newEnchant = null;
 				if (type.isRightClick()) {
 					if (newLevelSell == 0) {
-						newEnchant = null;
 						if (enchant instanceof VanillaEnchant vanilla) {
-							player.getInventory().getItemInMainHand().removeEnchantment(vanilla.getVanilla());
+							player.getInventory().getItem(EquipmentSlot.HAND).removeEnchantment(vanilla.getVanilla());
 						}
 					} else {
 						newEnchant = enchant;
-						newEnchant.setLevel(player.getInventory().getItemInMainHand(), newLevelSell);
+						newEnchant.setLevel(player.getInventory().getItem(EquipmentSlot.HAND), newLevelSell);
 					}
 					DataManager.getPlayerData(player).addBalance(oldCost / 2);
 					player.sendMessage(TextUtil.c("&eSold &6" + TextUtil.enchantmentName(key) + " &6" + TextUtil.toRoman(level) + " &efor &f" + TextUtil.formatMoney(oldCost / 2)));
-				} else {
+				} else if (type.isLeftClick()) {
 					if (cost > DataManager.getPlayerData(player).getBalance()) {
 						player.sendMessage(TextUtil.c("&cYou don't have enough money for that"));
 						return;
 					}
 
 					if (enchant == null) {
-						newEnchant = Enchant.of(player.getInventory().getItemInMainHand(), key);
+						newEnchant = Enchant.of(player.getInventory().getItem(EquipmentSlot.HAND), key);
 					} else {
 						newEnchant = enchant;
-						newEnchant.setLevel(player.getInventory().getItemInMainHand(), newLevelBuy);
+						newEnchant.setLevel(player.getInventory().getItem(EquipmentSlot.HAND), newLevelBuy);
 					}
 					DataManager.getPlayerData(player).removeBalance(cost);
 					player.sendMessage(TextUtil.c("&eBought &6" + TextUtil.enchantmentName(key) + " &6" + TextUtil.toRoman(newLevelBuy) + " &efor &f" + TextUtil.formatMoney(cost)));
 				}
 				data.setEnchant(newEnchant, i);
 
-				ItemManager.setData(player.getInventory().getItemInMainHand(), data);
+				ItemManager.setData(player.getInventory().getItem(EquipmentSlot.HAND), data);
 				open(player);
+
+				break;
 			}
 		}
 	}

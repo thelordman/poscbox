@@ -15,7 +15,11 @@ public abstract class ItemData extends ItemStackReference implements Serializabl
 
 	protected Enchant[] enchants = new Enchant[getPossibleEnchantKeys().length];
 
-	public void onRightClick(Player player) {
+	public void openEnchanter(Player player) {
+
+	}
+
+	public void openUpgrader(Player player) {
 
 	}
 
@@ -25,6 +29,10 @@ public abstract class ItemData extends ItemStackReference implements Serializabl
 
 	public Enchant[] getEnchants() {
 		return enchants;
+	}
+
+	public void setEnchants(Enchant[] enchants) {
+		this.enchants = enchants;
 	}
 
 	public void setEnchant(Enchant enchant, int index) {
@@ -37,6 +45,14 @@ public abstract class ItemData extends ItemStackReference implements Serializabl
 
 	public boolean isMax() {
 		return getRef().getType() == getMaxType();
+	}
+
+	public Material getNextType() {
+		return getRef().getType();
+	}
+
+	public double getNextTypeCost() {
+		return 0d;
 	}
 
 	public ItemData(ItemStack item) {
@@ -55,10 +71,10 @@ public abstract class ItemData extends ItemStackReference implements Serializabl
 	public void addTag(Tag tag) {
 		String addendum = "&7• ";
 		switch (tag) {
-			case ENCHANTABLE -> addendum += "Right click to enchant";
+			case ENCHANTABLE -> addendum += "Enchantable";
 			case UPGRADEABLE -> {
 				if (getRef().getType() != getMaxType()) {
-					addendum += "Material upgradeable on Smithing Table";
+					addendum += "Upgradeable";
 				}
 			}
 			case UNLOSABLE -> addendum += "Doesn't drop on death";
