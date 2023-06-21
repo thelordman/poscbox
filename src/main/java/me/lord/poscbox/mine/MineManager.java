@@ -39,6 +39,9 @@ public class MineManager {
 	}
 
 	public static double donatorMulti(Player player) {
+		if (DataManager.getPlayerData(player).getRank() == null) {
+			return 0d;
+		}
 		return switch (DataManager.getPlayerData(player).getRank()) {
 			case KNIGHT -> 0.25d;
 			case EMPEROR -> 0.5d;
