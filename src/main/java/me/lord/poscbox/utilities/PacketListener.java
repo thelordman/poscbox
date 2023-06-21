@@ -31,10 +31,6 @@ public final class PacketListener {
 
             @Override
             public void write(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise channelPromise) throws Exception {
-                if (packet.getClass().getName().equalsIgnoreCase("ClientboundBlockChangedAckPacket"))
-                    if (player.getCooldown(Material.SHIELD) != 0) {
-                        return;
-                    }
                 //if the server is sending a packet, the function "write" will be called. If you want to cancel a specific packet, just use return; Please keep in mind that using the return thing can break the entire server when using the return thing without knowing what you are doing.
                 super.write(channelHandlerContext, packet, channelPromise);
             }
