@@ -62,6 +62,9 @@ public class PlayerDeathListener implements Listener {
 			}
 
 			victimData.removeBalance(reward);
+			if (victimData.getBalance() < 0d) {
+				victimData.setBalance(0d);
+			}
 			attackerData.addBalance(reward * (MineManager.donatorMulti(attacker) + 1));
 			attackerData.addXp(reward * MineManager.donatorMulti(attacker));
 			attacker.sendActionBar(TextUtil.c("&f+" + TextUtil.formatMoney(reward * (MineManager.donatorMulti(attacker) + 1)) + " &7(" + TextUtil.format(MineManager.donatorMulti(attacker) + 1) + "x) &8| &f+" + TextUtil.format(reward * (MineManager.donatorMulti(attacker) + 1)) + "xp &7(" + TextUtil.format(MineManager.donatorMulti(attacker) + 1) + "x)"));
