@@ -23,6 +23,25 @@ public class BootsItemData extends ArmorItemData {
 
 	@Override
 	public Material getMaxType() {
-		return super.getMaxType();
+		return Material.NETHERITE_BOOTS;
+	}
+
+	@Override
+	public Material getNextType() {
+		return switch (getRef().getType()) {
+			case CHAINMAIL_BOOTS -> Material.IRON_BOOTS;
+			case IRON_BOOTS -> Material.DIAMOND_BOOTS;
+			default -> Material.NETHERITE_BOOTS;
+		};
+	}
+
+	@Override
+	public double getNextTypeCost() {
+		return switch (getNextType()) {
+			case IRON_BOOTS -> 5000d;
+			case DIAMOND_BOOTS -> 15000d;
+			case NETHERITE_BOOTS -> 50000d;
+			default -> 0d;
+		};
 	}
 }

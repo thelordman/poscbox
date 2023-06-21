@@ -54,6 +54,7 @@ public class DataManager {
 		} else if (globalData == null) {
 			globalData = new GlobalData();
 		}
+		globalData.setOriginalMaterials(new HashMap<>());
 
 		if (!PLAYER_DATA_FOLDER.exists()) PLAYER_DATA_FOLDER.mkdir();
 		for (Player player : Bukkit.getOnlinePlayers()) {

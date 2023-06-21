@@ -1,13 +1,18 @@
 package me.lord.poscbox.item;
 
+import ca.spottedleaf.dataconverter.types.nbt.NBTListType;
 import me.lord.poscbox.PoscBox;
 import me.lord.poscbox.item.data.*;
 import me.lord.poscbox.utilities.TextUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.craftbukkit.v1_19_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -62,15 +67,41 @@ public final class ItemManager {
 
 	public static void joinKit(Player player) {
 		ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET);
+		helmet.editMeta(meta -> meta.setUnbreakable(true));
 		ItemStack chestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE);
+		chestplate.editMeta(meta -> meta.setUnbreakable(true));
 		ItemStack leggings = new ItemStack(Material.CHAINMAIL_LEGGINGS);
+		leggings.editMeta(meta -> meta.setUnbreakable(true));
 		ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
+		boots.editMeta(meta -> meta.setUnbreakable(true));
 
 		ItemStack sword = new ItemStack(Material.STONE_SWORD);
+		sword.editMeta(meta -> meta.setUnbreakable(true));
 
 		ItemStack pickaxe = new ItemStack(Material.WOODEN_PICKAXE);
-
-		ItemStack bread = new ItemStack(Material.BREAD, 64);
+		net.minecraft.world.item.ItemStack nmsPickaxe = CraftItemStack.asNMSCopy(pickaxe);
+		ListTag listTag = new ListTag();
+		listTag.add(StringTag.valueOf("minecraft:cobblestone"));
+		listTag.add(StringTag.valueOf("minecraft:stone"));
+		listTag.add(StringTag.valueOf("minecraft:coal_ore"));
+		listTag.add(StringTag.valueOf("minecraft:deepslate_coal_ore"));
+		listTag.add(StringTag.valueOf("minecraft:iron_ore"));
+		listTag.add(StringTag.valueOf("minecraft:deepslate_iron_ore"));
+		listTag.add(StringTag.valueOf("minecraft:lapis_ore"));
+		listTag.add(StringTag.valueOf("minecraft:deepslate_lapis_ore"));
+		listTag.add(StringTag.valueOf("minecraft:gold_ore"));
+		listTag.add(StringTag.valueOf("minecraft:deepslate_gold_ore"));
+		listTag.add(StringTag.valueOf("minecraft:redstone_ore"));
+		listTag.add(StringTag.valueOf("minecraft:deepslate_redstone_ore"));
+		listTag.add(StringTag.valueOf("minecraft:diamond_ore"));
+		listTag.add(StringTag.valueOf("minecraft:deepslate_diamond_ore"));
+		listTag.add(StringTag.valueOf("minecraft:emerald_ore"));
+		listTag.add(StringTag.valueOf("minecraft:deepslate_emerald_ore"));
+		listTag.add(StringTag.valueOf("minecraft:ancient_debris"));
+		nmsPickaxe.getTag().put("CanDestroy", listTag);
+		pickaxe = nmsPickaxe.asBukkitMirror();
+		pickaxe.addItemFlags(ItemFlag.HIDE_DESTROYS);
+		pickaxe.editMeta(meta -> meta.setUnbreakable(true));
 
 		setData(helmet, new HelmetItemData(helmet));
 		setData(chestplate, new ChestplateItemData(chestplate));
@@ -81,8 +112,6 @@ public final class ItemManager {
 
 		setData(pickaxe, new PickaxeItemData(pickaxe));
 
-		setData(bread, new BreadItemData(bread));
-
 		player.getInventory().setHelmet(helmet);
 		player.getInventory().setChestplate(chestplate);
 		player.getInventory().setLeggings(leggings);
@@ -91,7 +120,5 @@ public final class ItemManager {
 		player.getInventory().setItem(0, sword);
 
 		player.getInventory().setItem(1, pickaxe);
-
-		player.getInventory().setItem(2, bread);
 	}
 }

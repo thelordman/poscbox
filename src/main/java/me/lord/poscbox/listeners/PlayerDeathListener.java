@@ -1,10 +1,12 @@
 package me.lord.poscbox.listeners;
 
+import me.lord.poscbox.PoscBox;
 import me.lord.poscbox.data.DataManager;
 import me.lord.poscbox.data.PlayerData;
 import me.lord.poscbox.discord.events.PlayerDeath;
 import me.lord.poscbox.item.ItemManager;
 import me.lord.poscbox.item.data.ItemData;
+import me.lord.poscbox.mine.MineManager;
 import me.lord.poscbox.utilities.TextUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -43,11 +45,26 @@ public class PlayerDeathListener implements Listener {
 					}
 					if (itemData.hasTag(ItemData.Tag.LOSABLE_10_LEVELS_LOWER)) {
 						// TODO: drop item if attacker level is 10 levels lower than victim
+						if (DataManager.getPlayerData(victim).getLevel() - DataManager.getPlayerData(attacker).getLevel() >= 10) {
+							PoscBox.mainWorld.dropItemNaturally(victim.getLocation(), item);
+						}
 					}
 				}
 			}
 
 			PlayerData attackerData = DataManager.getPlayerData(attacker);
+
+			double reward = 100d;
+			reward += (victimData.getLevel() - attackerData.getLevel()) * 100d;
+			reward += victimData.getBalance() * 0.05d;
+			if (reward < 0d) {
+				reward = 0d;
+			}
+
+			victimData.removeBalance(reward);
+			attackerData.addBalance(reward * MineManager.donatorMulti(attacker));
+			attackerData.addXp(reward * MineManager.donatorMulti(attacker));
+			attacker.sendActionBar(TextUtil.c("&f+" + TextUtil.formatMoney(reward) + " &7(" + TextUtil.format(MineManager.donatorMulti(attacker)) + "x) &8| &f+" + TextUtil.format(reward) + "xp &7(" + TextUtil.format(MineManager.donatorMulti(attacker)) + "x)"));
 
 			attackerData.incrementKillstreak();
 

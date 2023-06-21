@@ -11,7 +11,7 @@ public class InventoryDragListener implements Listener {
 	@EventHandler
 	public void onInventoryDrag(InventoryDragEvent event) {
 		Player player = (Player) event.getWhoClicked();
-		if (event.getView().title() == TextUtil.c("Enchanter")) {
+		if (event.getView().title() == TextUtil.c("Enchanter") || event.getView().title() == TextUtil.c("Upgrader")) {
 			DataManager.getPlayerData(player).getCurrentGUI().onInventoryDrag(event);
 		}
 	}

@@ -3,6 +3,7 @@ package me.lord.poscbox.data;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import me.lord.poscbox.PoscBox;
 import me.lord.poscbox.gui.GUI;
+import me.lord.poscbox.npc.interaction.NPCInteraction;
 import me.lord.poscbox.punishment.Punishment;
 import me.lord.poscbox.rank.Rank;
 import me.lord.poscbox.scoreboard.FastBoard;
@@ -31,14 +32,17 @@ public final class PlayerData implements Data {
 	@Nullable
 	private UUID uuid;
 	private double balance = 0d;
+	private int level = 1;
+	private double xp = 0d;
 	private int killstreak = 0;
 	private Rank rank = null;
 	private final ArrayList<Punishment> punishments = new ArrayList<>();
 	private Integer muted = 0;
 	private String address;
-	private byte[][] vault = new byte[54][];
+	private final byte[][] vault = new byte[54][];
 
 	private transient Integer selectedNPC = null;
+	private transient NPCInteraction currentInteraction = null;
 	private transient PermissionAttachment permissionAttachment = null;
 	private transient boolean godMode = false;
 	private transient boolean hunger = true;
@@ -268,5 +272,69 @@ public final class PlayerData implements Data {
 
 	public void setSelectedNPC(Integer selectedNPC) {
 		this.selectedNPC = selectedNPC;
+	}
+
+	public NPCInteraction getCurrentInteraction() {
+		return currentInteraction;
+	}
+
+	public void setCurrentInteraction(NPCInteraction currentInteraction) {
+		this.currentInteraction = currentInteraction;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+
+		Player player = Bukkit.getPlayer(uuid);
+		if (player != null) {
+			player.setLevel(level);
+			player.setExp(0f);
+		}
+	}
+
+	public void addLevel(int level) {
+		setLevel(this.level + level);
+	}
+
+	public void removeLevel(int level) {
+		setLevel(this.level - level);
+	}
+
+	public double getXp() {
+		return xp;
+	}
+
+	public void setXp(double xp) {
+		this.xp = xp;
+		if (this.xp >= xpCap()) {
+			addLevel(1);
+			this.xp = 0;
+
+			Player player = Bukkit.getPlayer(uuid);
+			if (player != null) {
+				player.sendMessage(TextUtil.c("&eYou leveled up to level &6" + level));
+			}
+		} else {
+			Player player = Bukkit.getPlayer(uuid);
+			if (player != null) {
+				player.setExp((float) (xp / xpCap()));
+			}
+		}
+	}
+
+	private double xpCap() {
+		return level * 1000;
+	}
+
+	public void addXp(double xp) {
+		setXp(this.xp + xp);
+	}
+
+	public void removeXp(double xp) {
+		setXp(this.xp - xp);
 	}
 }

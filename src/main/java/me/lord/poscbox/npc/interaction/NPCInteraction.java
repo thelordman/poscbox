@@ -45,6 +45,6 @@ public abstract class NPCInteraction {
 	}
 
 	public static void registerInteractions() {
-		interactions = ReflectionUtil.getSubclasses(NPCInteraction.class, "me.lord.posc.npc.interaction");
+		interactions = ReflectionUtil.getSubclasses(NPCInteraction.class, "me.lord.poscbox.npc.interaction");
 	}
 }

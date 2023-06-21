@@ -1,11 +1,9 @@
 package me.lord.poscbox.utilities;
 
-import me.lord.poscbox.PoscBox;
 import me.lord.poscbox.rank.Rank;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
 
 public class TeamUtil {
 
