@@ -70,8 +70,6 @@ public final class PoscBox extends JavaPlugin {
 		Discord.enable();
 		TeamUtil.loadTeams();
 
-		LootboxUtil.loadBoxes();
-
 		Bukkit.getScheduler().runTaskTimer(get(), () -> {
 			for (Player player : Bukkit.getOnlinePlayers()) {
 				PlayerData data = DataManager.getPlayerData(player);
@@ -89,7 +87,6 @@ public final class PoscBox extends JavaPlugin {
 			entry.getKey().getBlock().setType(entry.getValue());
 		}
 
-		LootboxUtil.currentLocation.getBlock().setType(Material.AIR);
 		DataManager.saveAll();
 		Discord.disable();
 	}
