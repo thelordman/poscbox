@@ -10,6 +10,10 @@ public class PlayerDamageListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
+        if (event.getEntity().getLocation().getY() < 15) {
+            event.setCancelled(true);
+            return;
+        }
         if (event.getDamager() instanceof Player attacker && event.getEntity() instanceof Player victim) {
             if (event.getEntity().getLocation().getY() < -25 && !CombatLog.inCombat(victim)) {
                 event.setCancelled(true);

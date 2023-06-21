@@ -11,21 +11,21 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public enum Rank {
-	OWNER("&4Owner", "§a§r", NamedTextColor.DARK_RED, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank", "poscbox.command.trail"),
-	HEAD_DEVELOPER("&5Head Developer", "§b§r", NamedTextColor.DARK_PURPLE, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank", "poscbox.command.trail"),
-	DEVELOPER("&dDeveloper", "§c§r", NamedTextColor.LIGHT_PURPLE, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank", "poscbox.command.trail"),
-	ADMIN("&cAdmin", "§d§r", NamedTextColor.RED, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank", "poscbox.command.trail"),
-	BUILDER("&9Builder", "§e§r", NamedTextColor.BLUE, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.creative", "poscbox.command.gamemode.survival", "poscbox.command.gamemode.spectator", "poscbox.command.joinkit", "poscbox.command.trail"),
+	OWNER("&4Owner", "§a§r", NamedTextColor.DARK_RED, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank", "poscbox.command.trail", "poscbox.command.spawn"),
+	HEAD_DEVELOPER("&5Head Developer", "§b§r", NamedTextColor.DARK_PURPLE, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank", "poscbox.command.trail", "poscbox.command.spawn"),
+	DEVELOPER("&dDeveloper", "§c§r", NamedTextColor.LIGHT_PURPLE, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank", "poscbox.command.trail", "poscbox.command.spawn"),
+	ADMIN("&cAdmin", "§d§r", NamedTextColor.RED, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank", "poscbox.command.trail", "poscbox.command.spawn"),
+	BUILDER("&9Builder", "§e§r", NamedTextColor.BLUE, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.creative", "poscbox.command.gamemode.survival", "poscbox.command.gamemode.spectator", "poscbox.command.joinkit", "poscbox.command.trail", "poscbox.command.spawn"),
 	SR_MOD("&6Sr. Mod", "§f§r", NamedTextColor.GOLD, "poscbox.staff", "poscbox.command.gamemode.*"),
-	MOD("&eMod", "§k§r", NamedTextColor.YELLOW, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.spectator", "poscbox.command.gamemode.survival", "poscbox.command.trail"),
-	JR_MOD("&aJr. Mod", "§l§r", NamedTextColor.GREEN, "poscbox.donator", "poscbox.staff"),
-	JR_DEVELOPER("&dJr. Developer", "§m§r", NamedTextColor.LIGHT_PURPLE, "poscbox.donator", "poscbox.staff", "poscbox.command.trail"),
+	MOD("&eMod", "§k§r", NamedTextColor.YELLOW, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.spectator", "poscbox.command.gamemode.survival", "poscbox.command.trail", "poscbox.command.spawn"),
+	JR_MOD("&aJr. Mod", "§l§r", NamedTextColor.GREEN, "poscbox.donator", "poscbox.staff", "poscbox.command.spawn"),
+	JR_DEVELOPER("&dJr. Developer", "§m§r", NamedTextColor.LIGHT_PURPLE, "poscbox.donator", "poscbox.staff", "poscbox.command.trail", "poscbox.command.spawn"),
 
-	LEGEND("&6Legend", "§n§r", NamedTextColor.GOLD, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat", "poscbox.command.trail"),
-	HERO("&bHero", "§o§r", NamedTextColor.AQUA, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat", "poscbox.command.trail"),
-	ELDER("&3Elder", "§r§r", NamedTextColor.DARK_AQUA, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat"),
-	EMPEROR("&eEmperor", "§r§r§r", NamedTextColor.YELLOW, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault"),
-	KNIGHT("&2Knight", "§r§r§r§r", NamedTextColor.DARK_GREEN, "poscbox.donator", "poscbox.command.enderchest");
+	LEGEND("&6Legend", "§n§r", NamedTextColor.GOLD, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat", "poscbox.command.trail", "poscbox.command.spawn"),
+	HERO("&bHero", "§o§r", NamedTextColor.AQUA, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat", "poscbox.command.trail", "poscbox.command.spawn"),
+	ELDER("&3Elder", "§r§r", NamedTextColor.DARK_AQUA, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat", "poscbox.command.spawn"),
+	EMPEROR("&eEmperor", "§r§r§r", NamedTextColor.YELLOW, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.spawn"),
+	KNIGHT("&2Knight", "§r§r§r§r", NamedTextColor.DARK_GREEN, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.spawn");
 
 	private final String[] permissions;
 	private final NamedTextColor teamColor;

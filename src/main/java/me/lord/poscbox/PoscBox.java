@@ -163,7 +163,7 @@ public final class PoscBox extends JavaPlugin {
 
 	// TODO: Sort TAB list according to rank
 	public static void updateTab(Player player) {
-		player.sendPlayerListHeader(TextUtil.c("\n&6&lPoscBox\n"));
+		player.sendPlayerListHeader(TextUtil.c("\n&6&lPoscPVP\n"));
 		player.playerListName(player.displayName());
 		player.sendPlayerListFooter(TextUtil.c("\n   &6Online&7: &f" + TextUtil.format(onlinePlayers) + " &8| " +
 				"&6Ping&7: &f" + TextUtil.format(player.getPing()) + " &8| " +
