@@ -81,7 +81,7 @@ public final class PoscBox extends JavaPlugin {
 			}
 		}, 0L, 20L);
 
-		TextComponent message = new TextComponent("Here is a link to join our discord server!");
+		TextComponent message = new TextComponent("ClICK HERE to join our discord and be informed on the later PoscPVP updates!");
 		message.setColor(ChatColor.GOLD);
 		message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/ucw4QbvDbu"));
 
