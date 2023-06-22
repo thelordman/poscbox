@@ -9,6 +9,9 @@ import me.lord.poscbox.utilities.Cmd;
 import me.lord.poscbox.utilities.ReflectionUtil;
 import me.lord.poscbox.utilities.TeamUtil;
 import me.lord.poscbox.utilities.TextUtil;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -77,6 +80,15 @@ public final class PoscBox extends JavaPlugin {
 				updateTab(player);
 			}
 		}, 0L, 20L);
+
+		TextComponent message = new TextComponent("Here is a link to join our discord server!");
+		message.setColor(ChatColor.GOLD);
+		message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/ucw4QbvDbu"));
+
+		Bukkit.getScheduler().runTaskTimer(get(), () -> {
+			Bukkit.broadcast(message);
+		}, 0L, 3600L);
+
 	}
 
 	@Override

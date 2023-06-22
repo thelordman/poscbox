@@ -10,7 +10,7 @@ public class PlayerDamageListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
-        if (event.getEntity().getLocation().getY() < 15) {
+        if (event.getEntity().getLocation().getY() > 15) {
             event.setCancelled(true);
             return;
         }
