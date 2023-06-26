@@ -15,10 +15,6 @@ public class PlayerDamageListener implements Listener {
             return;
         }
         if (event.getDamager() instanceof Player attacker && event.getEntity() instanceof Player victim) {
-            if (event.getEntity().getLocation().getY() < -25 && !CombatLog.inCombat(victim)) {
-                event.setCancelled(true);
-                return;
-            }
             CombatLog.setCombat(attacker);
             CombatLog.setCombat(victim);
         }
