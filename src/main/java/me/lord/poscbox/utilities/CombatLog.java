@@ -22,6 +22,7 @@ public class CombatLog {
             public void run() {
                 combat.replace(player, combat.get(player) - 1);
                 if (combat.get(player) == 0) {
+                    combat.remove(player);
                     player.sendActionBar(TextUtil.c("&aYou are no longer in combat!"));
                     cancel();
                 }

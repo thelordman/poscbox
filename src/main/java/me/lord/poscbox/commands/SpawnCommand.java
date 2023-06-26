@@ -15,8 +15,12 @@ import java.util.List;
 public class SpawnCommand implements Cmd {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (sender instanceof Player player && !CombatLog.inCombat(player)) {
-            player.teleport(new Location(Bukkit.getWorld("poscbox"), -163.5, 27, -209.5));
+        if (sender instanceof Player player) {
+            if (!CombatLog.inCombat(player)) {
+                player.teleport(new Location(Bukkit.getWorld("poscbox"), -163.5, 27, -209.5));
+            } else {
+                player.sendMessage("You are currently in combat!");
+            }
         }
         return true;
     }
@@ -29,10 +33,5 @@ public class SpawnCommand implements Cmd {
     @Override
     public String name() {
         return "spawn";
-    }
-
-    @Override
-    public String permission() {
-        return "poscbox.command.spawn";
     }
 }
