@@ -19,10 +19,10 @@ public class TeamUtil {
                 board.getTeam(name).color(rank.getTeamColor());
             }
         }
-        if (board.getTeam("z") == null) {
-            board.registerNewTeam("z");
-            board.getTeam("z").prefix(TextUtil.c("z"));
-            board.getTeam("z").color(NamedTextColor.GRAY);
+        if (board.getTeam("§r§r§r§r§r§r§r§r§r§r§r") == null) {
+            board.registerNewTeam("§r§r§r§r§r§r§r§r§r§r§r");
+            board.getTeam("§r§r§r§r§r§r§r§r§r§r§r").prefix(TextUtil.c("§r§r§r§r§r§r§r§r§r§r§r"));
+            board.getTeam("§r§r§r§r§r§r§r§r§r§r§r").color(NamedTextColor.GRAY);
         }
     }
 }
