@@ -21,6 +21,8 @@ public enum Rank {
 	JR_MOD("&aJr Mod", "§l§r", NamedTextColor.GREEN, "poscbox.donator", "poscbox.staff", "poscbox.command.spawn"),
 	JR_DEVELOPER("&dJr Developer", "§m§r", NamedTextColor.LIGHT_PURPLE, "poscbox.donator", "poscbox.staff", "poscbox.command.trail", "poscbox.command.spawn"),
 
+	MEDIA("&cMedia", "§n§r", NamedTextColor.RED, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat", "poscbox.command.trail", "poscbox.command.spawn"),
+
 	LEGEND("&6Legend", "§n§r", NamedTextColor.GOLD, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat", "poscbox.command.trail", "poscbox.command.spawn"),
 	HERO("&bHero", "§o§r", NamedTextColor.AQUA, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat", "poscbox.command.trail", "poscbox.command.spawn"),
 	ELDER("&3Elder", "§r§r", NamedTextColor.DARK_AQUA, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat", "poscbox.command.spawn"),

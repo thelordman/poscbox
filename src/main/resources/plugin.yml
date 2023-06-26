@@ -84,3 +84,7 @@ commands:
   spawn:
     description: Teleports you to the spawn.
     usage: /spawn
+  discord:
+    description: Join our Discord.
+    aliases: dc
+    usage: /discord
