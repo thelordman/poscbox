@@ -16,10 +16,10 @@ public enum Rank {
 	DEVELOPER("&dDeveloper", "§c§r", NamedTextColor.LIGHT_PURPLE, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank", "poscbox.command.trail", "poscbox.command.spawn"),
 	ADMIN("&cAdmin", "§d§r", NamedTextColor.RED, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.*", "poscbox.command.economy", "poscbox.command.joinkit", "poscbox.command.rank", "poscbox.command.trail", "poscbox.command.spawn"),
 	BUILDER("&9Builder", "§e§r", NamedTextColor.BLUE, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.creative", "poscbox.command.gamemode.survival", "poscbox.command.gamemode.spectator", "poscbox.command.joinkit", "poscbox.command.trail", "poscbox.command.spawn"),
-	SR_MOD("&6Sr. Mod", "§f§r", NamedTextColor.GOLD, "poscbox.staff", "poscbox.command.gamemode.*"),
+	SR_MOD("&6Sr Mod", "§f§r", NamedTextColor.GOLD, "poscbox.staff", "poscbox.command.gamemode.*"),
 	MOD("&eMod", "§k§r", NamedTextColor.YELLOW, "poscbox.donator", "poscbox.staff", "poscbox.command.gamemode.spectator", "poscbox.command.gamemode.survival", "poscbox.command.trail", "poscbox.command.spawn"),
-	JR_MOD("&aJr. Mod", "§l§r", NamedTextColor.GREEN, "poscbox.donator", "poscbox.staff", "poscbox.command.spawn"),
-	JR_DEVELOPER("&dJr. Developer", "§m§r", NamedTextColor.LIGHT_PURPLE, "poscbox.donator", "poscbox.staff", "poscbox.command.trail", "poscbox.command.spawn"),
+	JR_MOD("&aJr Mod", "§l§r", NamedTextColor.GREEN, "poscbox.donator", "poscbox.staff", "poscbox.command.spawn"),
+	JR_DEVELOPER("&dJr Developer", "§m§r", NamedTextColor.LIGHT_PURPLE, "poscbox.donator", "poscbox.staff", "poscbox.command.trail", "poscbox.command.spawn"),
 
 	LEGEND("&6Legend", "§n§r", NamedTextColor.GOLD, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat", "poscbox.command.trail", "poscbox.command.spawn"),
 	HERO("&bHero", "§o§r", NamedTextColor.AQUA, "poscbox.donator", "poscbox.command.enderchest", "poscbox.command.glow", "poscbox.command.vault", "poscbox.command.hat", "poscbox.command.trail", "poscbox.command.spawn"),
