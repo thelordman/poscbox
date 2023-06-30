@@ -25,14 +25,14 @@ public class MineManager {
 
 	private static double reward(Material material) {
 		return switch (material) {
-			case COBBLESTONE, STONE -> 1d;
-			case COAL_ORE -> 5d;
-			case IRON_ORE -> 10d;
-			case LAPIS_ORE -> 15d;
-			case GOLD_ORE -> 25d;
-			case REDSTONE_ORE -> 35d;
-			case DIAMOND_ORE -> 50d;
-			case EMERALD_ORE -> 100d;
+			case COBBLESTONE, STONE, DEEPSLATE -> 1d;
+			case COAL_ORE, DEEPSLATE_COAL_ORE -> 5d;
+			case IRON_ORE, DEEPSLATE_IRON_ORE -> 10d;
+			case LAPIS_ORE, DEEPSLATE_LAPIS_ORE -> 15d;
+			case GOLD_ORE, DEEPSLATE_GOLD_ORE -> 25d;
+			case REDSTONE_ORE, DEEPSLATE_REDSTONE_ORE -> 35d;
+			case DIAMOND_ORE, DEEPSLATE_DIAMOND_ORE -> 50d;
+			case EMERALD_ORE, DEEPSLATE_EMERALD_ORE -> 100d;
 			case ANCIENT_DEBRIS -> 500d;
 			default -> 0d;
 		};
