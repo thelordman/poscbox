@@ -86,22 +86,6 @@ public final class ItemManager {
 		listTag.add(StringTag.valueOf("minecraft:deepslate"));
 		listTag.add(StringTag.valueOf("minecraft:coal_ore"));
 		listTag.add(StringTag.valueOf("minecraft:deepslate_coal_ore"));
-
-		listTag.add(StringTag.valueOf("minecraft:iron_ore"));
-		listTag.add(StringTag.valueOf("minecraft:deepslate_iron_ore"));
-		listTag.add(StringTag.valueOf("minecraft:lapis_ore"));
-		listTag.add(StringTag.valueOf("minecraft:deepslate_lapis_ore"));
-
-		listTag.add(StringTag.valueOf("minecraft:gold_ore"));
-		listTag.add(StringTag.valueOf("minecraft:deepslate_gold_ore"));
-		listTag.add(StringTag.valueOf("minecraft:redstone_ore"));
-		listTag.add(StringTag.valueOf("minecraft:deepslate_redstone_ore"));
-		listTag.add(StringTag.valueOf("minecraft:diamond_ore"));
-		listTag.add(StringTag.valueOf("minecraft:deepslate_diamond_ore"));
-		listTag.add(StringTag.valueOf("minecraft:emerald_ore"));
-		
-		listTag.add(StringTag.valueOf("minecraft:deepslate_emerald_ore"));
-		listTag.add(StringTag.valueOf("minecraft:ancient_debris"));
 		nmsPickaxe.getTag().put("CanDestroy", listTag);
 		pickaxe = nmsPickaxe.asBukkitMirror();
 		pickaxe.addItemFlags(ItemFlag.HIDE_DESTROYS);
