@@ -48,6 +48,7 @@ public class MineManager {
 			case ELDER -> 0.75d;
 			case HERO -> 1d;
 			case LEGEND, OWNER, HEAD_DEVELOPER, DEVELOPER, ADMIN, BUILDER, SR_MOD, MOD, JR_MOD, JR_DEVELOPER -> 1.25d;
+			default -> 0d;
 		};
 	}
 }

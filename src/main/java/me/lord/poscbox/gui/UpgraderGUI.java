@@ -7,7 +7,10 @@ import me.lord.poscbox.item.enchant.Enchant;
 import me.lord.poscbox.utilities.TextUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_19_R3.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -107,6 +110,32 @@ public class UpgraderGUI extends ChestGUI {
 		itemData.getRef().setType(material);
 		itemData.setEnchants(new Enchant[itemData.getPossibleEnchantKeys().length]);
 		ItemManager.setData(player.getInventory().getItem(EquipmentSlot.HAND), itemData);
+
+		net.minecraft.world.item.ItemStack nmsItem = CraftItemStack.asNMSCopy(player.getInventory().getItem(EquipmentSlot.HAND));
+		ListTag listTag = (ListTag) nmsItem.getTag().get("CanDestroy");
+		switch (material) {
+			case STONE_PICKAXE -> {
+				listTag.add(StringTag.valueOf("minecraft:iron_ore"));
+				listTag.add(StringTag.valueOf("minecraft:deepslate_iron_ore"));
+				listTag.add(StringTag.valueOf("minecraft:lapis_ore"));
+				listTag.add(StringTag.valueOf("minecraft:deepslate_lapis_ore"));
+			}
+			case IRON_PICKAXE -> {
+				listTag.add(StringTag.valueOf("minecraft:gold_ore"));
+				listTag.add(StringTag.valueOf("minecraft:deepslate_gold_ore"));
+				listTag.add(StringTag.valueOf("minecraft:redstone_ore"));
+				listTag.add(StringTag.valueOf("minecraft:deepslate_redstone_ore"));
+				listTag.add(StringTag.valueOf("minecraft:diamond_ore"));
+				listTag.add(StringTag.valueOf("minecraft:deepslate_diamond_ore"));
+				listTag.add(StringTag.valueOf("minecraft:emerald_ore"));
+			}
+			case DIAMOND_PICKAXE -> {
+				listTag.add(StringTag.valueOf("minecraft:deepslate_emerald_ore"));
+				listTag.add(StringTag.valueOf("minecraft:ancient_debris"));
+			}
+		}
+		nmsItem.getTag().put("CanDestroy", listTag);
+		player.getInventory().setItem(EquipmentSlot.HAND, nmsItem.asBukkitMirror());
 
 		open(player);
 	}
