@@ -110,6 +110,12 @@ public final class PlayerData implements Data {
 	public void setBalance(double balance) {
 		this.balance = balance;
 		getScoreboard().updateBalance();
+
+		Player player = Bukkit.getPlayer(uuid);
+		if (!GlobalData.baltop.containsKey(player))
+			GlobalData.baltop.put(player, getBalance());
+		else
+			GlobalData.leveltop.replace(player, getBalance());
 	}
 
 	public void addBalance(double amount) {
@@ -294,6 +300,10 @@ public final class PlayerData implements Data {
 			player.setLevel(level);
 			player.setExp(0f);
 		}
+		if (!GlobalData.leveltop.containsKey(player))
+			GlobalData.leveltop.put(player, (double) getLevel());
+		else
+			GlobalData.leveltop.replace(player, (double) getLevel());
 	}
 
 	public void addLevel(int level) {

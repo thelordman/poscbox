@@ -12,7 +12,7 @@ public class CombatLog {
 
     public static void setCombat(Player player) {
         if (combat.containsKey(player)) {
-            combat.replace(player, 5);
+            combat.replace(player, 15);
             return;
         }
         player.sendActionBar(TextUtil.c("&cYou are now in combat!"));

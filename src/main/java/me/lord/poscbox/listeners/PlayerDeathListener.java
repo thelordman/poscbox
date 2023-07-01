@@ -32,7 +32,7 @@ public class PlayerDeathListener implements Listener {
 		victimData.getScoreboard().updateKDR();
 		victimData.getScoreboard().updateKillstreak();
 		if (attacker != null) {
-			for (ItemStack item : victim.getInventory().getStorageContents()) {
+			for (ItemStack item : victim.getInventory().getContents()) {
 				if (item == null) {
 					continue;
 				}
