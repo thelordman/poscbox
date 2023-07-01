@@ -47,6 +47,7 @@ public class PlayerDeathListener implements Listener {
 						// TODO: drop item if attacker level is 10 levels lower than victim
 						if (DataManager.getPlayerData(victim).getLevel() - DataManager.getPlayerData(attacker).getLevel() >= 10) {
 							PoscBox.mainWorld.dropItemNaturally(victim.getLocation(), item);
+							victimData.setDroppedEquipment(true);
 						}
 					}
 				}
