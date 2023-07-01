@@ -44,7 +44,6 @@ public class PlayerDeathListener implements Listener {
 						continue;
 					}
 					if (itemData.hasTag(ItemData.Tag.LOSABLE_10_LEVELS_LOWER)) {
-						// TODO: drop item if attacker level is 10 levels lower than victim
 						if (DataManager.getPlayerData(victim).getLevel() - DataManager.getPlayerData(attacker).getLevel() >= 10) {
 							PoscBox.mainWorld.dropItemNaturally(victim.getLocation(), item);
 							victimData.setDroppedEquipment(true);
@@ -56,7 +55,7 @@ public class PlayerDeathListener implements Listener {
 			PlayerData attackerData = DataManager.getPlayerData(attacker);
 
 			double reward = 100d;
-			reward += (victimData.getLevel() - attackerData.getLevel()) * 100d;
+			reward += Math.max((victimData.getLevel() - attackerData.getLevel()) * 100d, 0d);
 			reward += victimData.getBalance() * 0.05d;
 			if (reward < 0d) {
 				reward = 0d;
@@ -66,11 +65,17 @@ public class PlayerDeathListener implements Listener {
 			if (victimData.getBalance() < 0d) {
 				victimData.setBalance(0d);
 			}
+
+			reward *= 1 + ((double) attackerData.getKillstreak()) / 10d;
+
 			attackerData.addBalance(reward * (MineManager.donatorMulti(attacker) + 1));
 			attackerData.addXp(reward * MineManager.donatorMulti(attacker));
 			attacker.sendActionBar(TextUtil.c("&f+" + TextUtil.formatMoney(reward * (MineManager.donatorMulti(attacker) + 1)) + " &7(" + TextUtil.format(MineManager.donatorMulti(attacker) + 1) + "x) &8| &f+" + TextUtil.format(reward * (MineManager.donatorMulti(attacker) + 1)) + "xp &7(" + TextUtil.format(MineManager.donatorMulti(attacker) + 1) + "x)"));
 
+			attacker.setHealth(attacker.getHealth() + 6);
+
 			attackerData.incrementKillstreak();
+
 
 			attackerData.getScoreboard().updateKills();
 			attackerData.getScoreboard().updateKDR();

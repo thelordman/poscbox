@@ -1,12 +1,10 @@
 package me.lord.poscbox.listeners;
 
-import com.destroystokyo.paper.profile.PlayerProfile;
 import me.lord.poscbox.PoscBox;
 import me.lord.poscbox.data.DataManager;
 import me.lord.poscbox.discord.events.PlayerJoin;
 import me.lord.poscbox.item.ItemManager;
 import me.lord.poscbox.npc.NPCManager;
-import me.lord.poscbox.rank.Rank;
 import me.lord.poscbox.utilities.PacketListener;
 import me.lord.poscbox.utilities.TeamUtil;
 import me.lord.poscbox.utilities.TextUtil;
@@ -23,7 +21,6 @@ public class PlayerJoinListener implements Listener {
 		PoscBox.onlinePlayers++;
 
 		PacketListener.injectPlayer(event.getPlayer());
-		if (!event.getPlayer().hasPlayedBefore()) DataManager.getGlobal().incrementTotalUsers();
 		if (!event.getPlayer().hasPlayedBefore()) {
 			DataManager.getGlobal().incrementTotalUsers();
 
