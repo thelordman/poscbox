@@ -32,7 +32,7 @@ public class TrailCommand implements Cmd {
                     @Override
                     public void run() {
                         if (!DataManager.getPlayerData(player).hasTrail()) cancel();
-                        player.getWorld().spawnParticle(Particle.valueOf(args[0].toUpperCase()), player.getLocation(), 5);
+                        player.getWorld().spawnParticle(Particle.valueOf(args[0].toUpperCase()), player.getLocation(), 5, 0, -1, 0, 0);
                     }
                 }.runTaskTimer(PoscBox.get(), 0, 5);
             } else {
