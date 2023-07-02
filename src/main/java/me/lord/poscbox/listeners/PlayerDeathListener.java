@@ -72,10 +72,9 @@ public class PlayerDeathListener implements Listener {
 			attackerData.addXp(reward * MineManager.donatorMulti(attacker));
 			attacker.sendActionBar(TextUtil.c("&f+" + TextUtil.formatMoney(reward * (MineManager.donatorMulti(attacker) + 1)) + " &7(" + TextUtil.format(MineManager.donatorMulti(attacker) + 1) + "x) &8| &f+" + TextUtil.format(reward * (MineManager.donatorMulti(attacker) + 1)) + "xp &7(" + TextUtil.format(MineManager.donatorMulti(attacker) + 1) + "x)"));
 
-			attacker.setHealth(attacker.getHealth() + 6);
+			attacker.setHealth(Math.min(attacker.getHealth() + 6d, 20d));
 
 			attackerData.incrementKillstreak();
-
 
 			attackerData.getScoreboard().updateKills();
 			attackerData.getScoreboard().updateKDR();

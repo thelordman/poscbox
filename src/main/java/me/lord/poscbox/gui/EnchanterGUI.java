@@ -66,6 +66,7 @@ public class EnchanterGUI extends ChestGUI {
 				case "thorns" -> "Sends damage dealt to you back to the attacker.";
 				case "swift_sneak" -> "Increases sneaking speed.";
 				case "efficiency" -> "Increases mining speed.";
+				case "fortune" -> "Multiplies rewards by +0.1x per level.";
 				default -> throw new RuntimeException("Illegal enchant key");
 			};
 			lore[2] = "";

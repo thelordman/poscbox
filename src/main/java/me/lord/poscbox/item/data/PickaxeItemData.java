@@ -15,7 +15,7 @@ public class PickaxeItemData extends EquipmentItemData {
 
 	@Override
 	public String[] getPossibleEnchantKeys() {
-		return new String[]{"efficiency"};
+		return new String[]{"efficiency", "fortune"};
 	}
 
 	@Override

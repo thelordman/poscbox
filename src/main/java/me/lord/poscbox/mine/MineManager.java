@@ -1,9 +1,12 @@
 package me.lord.poscbox.mine;
 
 import me.lord.poscbox.data.DataManager;
+import me.lord.poscbox.item.ItemManager;
+import me.lord.poscbox.item.data.PickaxeItemData;
 import me.lord.poscbox.utilities.TextUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 
 public class MineManager {
 	public static void mine(Player player, Material material) {
@@ -11,10 +14,13 @@ public class MineManager {
 	}
 
 	private static void processBlock(Player player, Material material) {
+		PickaxeItemData data = (PickaxeItemData) ItemManager.getData(player.getInventory().getItem(EquipmentSlot.HAND));
+
 		double reward = reward(material);
 		double multi = 1d;
 
 		multi += donatorMulti(player);
+		multi += data.getEnchants()[1] != null ? ((double) data.getEnchants()[1].getLevel()) / 10d : 0d;
 
 		reward *= multi;
 
@@ -25,7 +31,8 @@ public class MineManager {
 
 	private static double reward(Material material) {
 		return switch (material) {
-			case COBBLESTONE, STONE, DEEPSLATE -> 1d;
+			case STONE, DEEPSLATE -> 1d;
+			case COBBLESTONE -> 1.5d;
 			case COAL_ORE, DEEPSLATE_COAL_ORE -> 5d;
 			case IRON_ORE, DEEPSLATE_IRON_ORE -> 10d;
 			case LAPIS_ORE, DEEPSLATE_LAPIS_ORE -> 15d;
